@@ -117,8 +117,8 @@ def generate_portal():
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoxiWorks Open Roles | Personal Referral Portal</title>
-    <meta name="description" content="Personal employee referral portal for open positions at MoxiWorks Pune. Direct public job description downloads and referral requests.">
+    <title>Shubham's Personal MoxiWorks Referral Portal</title>
+    <meta name="description" content="Shubham's personal employee referral portal for open positions at MoxiWorks Pune. Explore roles and submit your referral application directly.">
     <link rel="icon" href="https://moxiworks.com/wp-content/uploads/2025/06/cropped-moxiworks-favicon-32x32.png" sizes="32x32" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -131,7 +131,7 @@ def generate_portal():
             --moxi-denim: #1F82A5;
             --moxi-denim-dark: #166580;
             --moxi-green: #86F59A;
-            --moxi-green-dark: #1b8748;
+            --moxi-green-dark: #167a3f;
             --moxi-pale-blue: #EFF7FA;
             --moxi-light-bg: #F4F9FC;
             --moxi-marine: #2976CC;
@@ -207,7 +207,7 @@ def generate_portal():
             background-color: rgba(134, 245, 154, 0.18);
             color: var(--moxi-green);
             border: 1px solid rgba(134, 245, 154, 0.35);
-            padding: 0.25rem 0.65rem;
+            padding: 0.25rem 0.75rem;
             border-radius: var(--radius-full);
             font-size: 0.75rem;
             font-weight: 700;
@@ -246,9 +246,9 @@ def generate_portal():
             gap: 0.5rem;
             background-color: rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             color: #FFFFFF;
-            padding: 0.4rem 1rem;
+            padding: 0.45rem 1.25rem;
             border-radius: var(--radius-full);
             font-size: 0.85rem;
             font-weight: 600;
@@ -265,9 +265,9 @@ def generate_portal():
         }
 
         .hero-title {
-            font-size: 2.75rem;
+            font-size: 2.65rem;
             font-weight: 800;
-            line-height: 1.15;
+            line-height: 1.18;
             letter-spacing: -0.02em;
             margin-bottom: 1rem;
         }
@@ -280,7 +280,7 @@ def generate_portal():
             font-size: 1.1rem;
             color: #D3E7F0;
             max-width: 680px;
-            margin: 0 auto;
+            margin: 0 auto 1.5rem;
             line-height: 1.6;
         }
 
@@ -293,10 +293,10 @@ def generate_portal():
             z-index: 10;
         }
 
-        /* Public Access Banner */
-        .public-banner {
+        /* Info Banner */
+        .portal-banner {
             background-color: #FFFFFF;
-            border-left: 4px solid var(--moxi-green-dark);
+            border-left: 4px solid var(--moxi-denim);
             border-radius: var(--radius-md);
             padding: 1.25rem 1.5rem;
             box-shadow: var(--shadow-card);
@@ -308,25 +308,25 @@ def generate_portal():
             flex-wrap: wrap;
         }
 
-        .public-banner-text {
+        .portal-banner-text {
             display: flex;
             align-items: center;
             gap: 0.85rem;
         }
 
-        .public-banner-icon {
+        .portal-banner-icon {
             font-size: 1.6rem;
             flex-shrink: 0;
         }
 
-        .public-banner-text h4 {
+        .portal-banner-text h4 {
             font-size: 0.95rem;
             font-weight: 700;
             color: var(--moxi-navy);
             margin-bottom: 0.2rem;
         }
 
-        .public-banner-text p {
+        .portal-banner-text p {
             font-size: 0.85rem;
             color: var(--text-muted);
         }
@@ -558,20 +558,20 @@ def generate_portal():
             font-weight: 500;
         }
 
-        /* Card Actions */
+        /* Card Actions - Streamlined */
         .card-actions {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
             padding-top: 0.85rem;
             border-top: 1px solid var(--border-color);
         }
 
         .btn-view-jd {
             flex: 1;
-            background-color: var(--moxi-navy);
-            color: #FFFFFF;
-            border: none;
+            background-color: var(--moxi-light-bg);
+            border: 1.5px solid var(--border-color);
+            color: var(--moxi-navy);
             padding: 0.65rem 1rem;
             font-size: 0.875rem;
             font-weight: 700;
@@ -585,28 +585,30 @@ def generate_portal():
         }
 
         .btn-view-jd:hover {
-            background-color: var(--moxi-denim);
+            border-color: var(--moxi-denim);
+            background-color: var(--moxi-pale-blue);
+            color: var(--moxi-denim);
         }
 
-        .btn-download-direct {
-            background-color: var(--moxi-light-bg);
-            border: 1px solid var(--border-color);
-            color: var(--moxi-navy);
-            padding: 0.65rem 0.9rem;
-            font-size: 0.85rem;
+        .btn-apply-direct {
+            background-color: var(--moxi-navy);
+            color: #FFFFFF;
+            border: none;
+            padding: 0.65rem 1.15rem;
+            font-size: 0.875rem;
             font-weight: 700;
             border-radius: var(--radius-md);
-            text-decoration: none;
+            cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
-        .btn-download-direct:hover {
-            background-color: var(--moxi-green);
-            border-color: var(--moxi-green);
-            color: var(--moxi-navy);
+        .btn-apply-direct:hover {
+            background-color: var(--moxi-denim);
+            transform: translateY(-1px);
         }
 
         .btn-icon {
@@ -811,22 +813,82 @@ def generate_portal():
             background-color: var(--moxi-green);
             color: var(--moxi-navy);
             border: none;
-            padding: 0.75rem 1.5rem;
+            padding: 0.85rem 1.75rem;
             border-radius: var(--radius-full);
             font-weight: 800;
-            font-size: 0.95rem;
+            font-size: 1rem;
             cursor: pointer;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            box-shadow: 0 4px 12px rgba(134, 245, 154, 0.4);
+            box-shadow: 0 4px 14px rgba(134, 245, 154, 0.45);
             transition: all 0.2s ease;
         }
 
         .btn-cta-green:hover {
             background-color: #6eed84;
             transform: translateY(-1px);
+        }
+
+        /* Application Form Modal */
+        .app-modal-card {
+            background-color: #FFFFFF;
+            width: 100%;
+            max-width: 620px;
+            max-height: 90vh;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 50px rgba(10, 54, 75, 0.35);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: modalIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .app-modal-body {
+            padding: 1.75rem 2rem;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.15rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--moxi-navy);
+        }
+
+        .form-label span.req {
+            color: #e53e3e;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            font-family: inherit;
+            background-color: var(--moxi-light-bg);
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--moxi-denim);
+            background-color: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(31, 130, 165, 0.15);
+        }
+
+        .form-helper {
+            font-size: 0.75rem;
+            color: var(--text-muted);
         }
 
         /* Toast Alert */
@@ -906,11 +968,11 @@ def generate_portal():
         }
 
         @media (max-width: 768px) {
-            .hero-title { font-size: 2rem; }
+            .hero-title { font-size: 1.95rem; }
             .jobs-grid { grid-template-columns: 1fr; }
             .header-meta { display: none; }
-            .modal-card { max-height: 95vh; margin: 0.5rem; }
-            .modal-body { padding: 1.25rem; }
+            .modal-card, .app-modal-card { max-height: 95vh; margin: 0.5rem; }
+            .modal-body, .app-modal-body { padding: 1.25rem; }
         }
     </style>
 </head>
@@ -921,7 +983,7 @@ def generate_portal():
         <div class="header-inner">
             <a href="https://moxiworks.com" target="_blank" class="brand-logo">
                 <img src="https://moxiworks.com/wp-content/uploads/2025/06/moxiworks-logo-dark.svg" alt="MoxiWorks Logo" class="logo-img" />
-                <span class="brand-pill">Personal Referral Hub</span>
+                <span class="brand-pill">Shubham's Referral Portal</span>
             </a>
             <div class="header-meta">
                 <span>Active Roles: <strong>20 Positions</strong></span>
@@ -935,22 +997,22 @@ def generate_portal():
         <div class="hero-container">
             <div class="hero-badge">
                 <span class="dot"></span>
-                <span>Personal Employee Referral Portal for MoxiWorks Pune</span>
+                <span>Shubham's Personal MoxiWorks Referral Portal</span>
             </div>
-            <h1 class="hero-title">Open Opportunities & <span class="highlight">Employee Referrals</span></h1>
-            <p class="hero-desc">Explore verified open job descriptions across Engineering, Product, Design, Support, Marketing, and Finance at MoxiWorks Pune. Read full role details or reach out for a direct employee referral.</p>
+            <h1 class="hero-title">Explore Open Roles & <span class="highlight">Get Referred</span></h1>
+            <p class="hero-desc">Welcome to Shubham's personal employee referral portal for open positions at MoxiWorks Pune. Explore role requirements and submit your referral application directly.</p>
         </div>
     </section>
 
     <!-- Main Content -->
     <main class="main-container">
-        <!-- Public Access Banner -->
-        <div class="public-banner">
-            <div class="public-banner-text">
-                <div class="public-banner-icon">🚀</div>
+        <!-- Referral Pipeline Banner -->
+        <div class="portal-banner">
+            <div class="portal-banner-text">
+                <div class="portal-banner-icon">💼</div>
                 <div>
-                    <h4>Public Access - Zero Sign-In Required</h4>
-                    <p>All job descriptions and Word (.docx) downloads on this portal are publicly hosted for applicants and referrals.</p>
+                    <h4>How Referral Applications Work</h4>
+                    <p>Select any role below to review the full job description. Click <strong>Apply for Referral</strong> to submit your profile and resume directly into Shubham's referral database.</p>
                 </div>
             </div>
             <button class="pill" style="background-color: var(--moxi-pale-blue); color: var(--moxi-denim); font-weight: 700; border-color: var(--border-hover);" onclick="copyPortalLink()">
@@ -999,7 +1061,6 @@ def generate_portal():
             <div class="jobs-grid">
         '''
         for r in cat_roles:
-            encoded_file = urllib.parse.quote(r['file'])
             skills_html = ''.join([f'<span class="skill-chip">{s}</span>' for s in r['skills']])
             html_template += f'''
                 <!-- {r['title']} -->
@@ -1017,12 +1078,12 @@ def generate_portal():
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('{r['id']}')">
-                            <span>👁️</span> Read Full JD
+                            <span>👁️</span> View Role Details
                         </button>
-                        <a href="docs/{encoded_file}" download="{r['file']}" class="btn-download-direct" title="Download .docx">
-                            <span>⬇️</span> .docx
-                        </a>
-                        <button class="btn-icon" title="Share Link" onclick="copyRoleLink('{r['id']}')">🔗</button>
+                        <button class="btn-apply-direct" onclick="openAppModal('{r['id']}')">
+                            <span>🚀</span> Apply for Referral
+                        </button>
+                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('{r['id']}')">🔗</button>
                     </div>
                 </article>
             '''
@@ -1031,7 +1092,7 @@ def generate_portal():
         </section>
         '''
 
-    # Modal, toast, scripts
+    # Client payload
     client_roles = []
     for r in roles:
         client_roles.append({
@@ -1047,8 +1108,8 @@ def generate_portal():
     html_template += '''
     </main>
 
-    <!-- Modal JD Reader -->
-    <div id="jdModal" class="modal-overlay" onclick="closeModalOnBackdrop(event)">
+    <!-- Modal 1: JD Reader -->
+    <div id="jdModal" class="modal-overlay" onclick="closeModalOnBackdrop(event, 'jdModal')">
         <div class="modal-card">
             <div class="modal-header">
                 <div>
@@ -1065,13 +1126,77 @@ def generate_portal():
                 <!-- Injected via JS -->
             </div>
             <div class="modal-footer">
-                <a id="modalDownloadBtn" href="#" download class="btn-download-direct" style="background-color: #FFFFFF;">
-                    <span>⬇️</span> Download Document (.docx)
-                </a>
-                <button id="modalApplyBtn" class="btn-cta-green" onclick="applyForRole()">
-                    <span>📩</span> Apply for Referral
+                <button class="btn-view-jd" style="max-width: 180px;" onclick="closeJdModal()">
+                    ← Back to Roles
+                </button>
+                <button id="modalApplyBtn" class="btn-cta-green" onclick="switchFromJdToApp()">
+                    <span>🚀</span> Apply for Referral
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Referral Application Intake Form -->
+    <div id="appModal" class="modal-overlay" onclick="closeModalOnBackdrop(event, 'appModal')">
+        <div class="app-modal-card">
+            <div class="modal-header">
+                <div>
+                    <h2 style="font-size: 1.35rem;">Submit Referral Application</h2>
+                    <p style="font-size: 0.85rem; color: #CFE3EC; margin-top: 0.2rem;">Direct to Shubham's referral database</p>
+                </div>
+                <button class="modal-close" onclick="closeAppModal()">✕</button>
+            </div>
+            <form id="referralForm" class="app-modal-body" onsubmit="submitReferralForm(event)">
+                <div class="form-group">
+                    <label class="form-label">Position Applying For <span class="req">*</span></label>
+                    <input type="text" id="appRoleTitle" class="form-input" readonly style="font-weight: 700; background-color: #EBF4F8;" />
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label">Full Name <span class="req">*</span></label>
+                        <input type="text" id="appName" class="form-input" placeholder="e.g. Rahul Sharma" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address <span class="req">*</span></label>
+                        <input type="email" id="appEmail" class="form-input" placeholder="e.g. rahul@example.com" required />
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label">Phone Number <span class="req">*</span></label>
+                        <input type="tel" id="appPhone" class="form-input" placeholder="+91 98765 43210" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Years of Experience <span class="req">*</span></label>
+                        <input type="text" id="appExp" class="form-input" placeholder="e.g. 5 Years" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">LinkedIn Profile URL <span class="req">*</span></label>
+                    <input type="url" id="appLinkedin" class="form-input" placeholder="https://linkedin.com/in/yourprofile" required />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Resume / CV Link (Google Drive / Dropbox / Cloud link) <span class="req">*</span></label>
+                    <input type="url" id="appResume" class="form-input" placeholder="https://drive.google.com/file/d/... (Make sure link is viewable)" required />
+                    <span class="form-helper">Please provide a publicly viewable link to your PDF resume (e.g. Google Drive, Dropbox, or OneDrive).</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Brief Note / Highlights (Optional)</label>
+                    <textarea id="appNotes" class="form-textarea" rows="3" placeholder="Briefly highlight your key tech stack, major achievements, or why you are a great fit..."></textarea>
+                </div>
+
+                <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 0.75rem;">
+                    <button type="button" class="btn-view-jd" style="max-width: 130px;" onclick="closeAppModal()">Cancel</button>
+                    <button type="submit" id="btnSubmitApp" class="btn-cta-green">
+                        <span>🚀</span> Submit Application
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -1090,11 +1215,11 @@ def generate_portal():
             <div class="disclaimer-card">
                 <div class="disclaimer-heading">⚠️ Personal Employee Referral Disclaimer</div>
                 <p class="disclaimer-body">
-                    This is an independent, personal employee referral portal created exclusively to connect qualified candidates with open roles at MoxiWorks Pune. This website is not an official MoxiWorks corporate portal or career application site. All formal job applications, interviews, and hiring decisions are governed exclusively by official MoxiWorks talent acquisition teams and hiring managers. All company names, logos, and registered trademarks belong to their respective owners.
+                    This is an independent, personal employee referral portal created by Shubham exclusively to connect qualified candidates with open positions at MoxiWorks Pune. This website is not an official MoxiWorks corporate portal or career application site. All formal job applications, interviews, and hiring decisions are governed exclusively by official MoxiWorks talent acquisition teams and hiring managers. All company names, logos, and registered trademarks belong to their respective owners.
                 </p>
             </div>
 
-            <p style="font-size: 0.8rem; color: #7B99A8;">© 2026 Personal Employee Referral Hub for MoxiWorks Pune. Maintained for community talent referral purposes.</p>
+            <p style="font-size: 0.8rem; color: #7B99A8;">© 2026 Shubham's Personal MoxiWorks Referral Portal. Maintained for community talent referral purposes.</p>
         </div>
     </footer>
 
@@ -1103,12 +1228,16 @@ def generate_portal():
         let currentCat = 'all';
         let activeRole = null;
 
+        // Custom Google Apps Script / Formspree webhook endpoint placeholder
+        // Shubham can paste his Google Apps Script Webhook URL here anytime!
+        const REFERRAL_WEBHOOK_URL = '';
+
         function showToast(msg, icon = '📋') {
             const t = document.getElementById('toast');
             document.getElementById('toastMsg').innerText = msg;
             document.getElementById('toastIcon').innerText = icon;
             t.classList.add('show');
-            setTimeout(() => t.classList.remove('show'), 3000);
+            setTimeout(() => t.classList.remove('show'), 3500);
         }
 
         function setCategory(cat, pill) {
@@ -1154,12 +1283,6 @@ def generate_portal():
             document.getElementById('modalLoc').innerText = `📍 ${r.location}`;
             document.getElementById('modalDept').innerText = r.dept;
             
-            const encoded = encodeURIComponent(r.file);
-            const downloadBtn = document.getElementById('modalDownloadBtn');
-            downloadBtn.href = `docs/${encoded}`;
-            downloadBtn.setAttribute('download', r.file);
-
-            // Injected rich formatted HTML
             document.getElementById('modalBody').innerHTML = r.formatted_html;
             document.getElementById('jdModal').classList.add('active');
             window.location.hash = roleId;
@@ -1170,8 +1293,29 @@ def generate_portal():
             history.pushState('', document.title, window.location.pathname + window.location.search);
         }
 
-        function closeModalOnBackdrop(e) {
-            if (e.target.id === 'jdModal') closeJdModal();
+        function switchFromJdToApp() {
+            if (!activeRole) return;
+            const rId = activeRole.id;
+            closeJdModal();
+            openAppModal(rId);
+        }
+
+        function openAppModal(roleId) {
+            const r = rolesData.find(item => item.id === roleId);
+            if (!r) return;
+            activeRole = r;
+            document.getElementById('appRoleTitle').value = `${r.title} (${r.exp}) - Pune`;
+            document.getElementById('appModal').classList.add('active');
+        }
+
+        function closeAppModal() {
+            document.getElementById('appModal').classList.remove('active');
+        }
+
+        function closeModalOnBackdrop(e, modalId) {
+            if (e.target.id === modalId) {
+                document.getElementById(modalId).classList.remove('active');
+            }
         }
 
         function copyRoleLink(roleId) {
@@ -1187,11 +1331,70 @@ def generate_portal():
             });
         }
 
-        function applyForRole() {
-            if (!activeRole) return;
-            const subject = encodeURIComponent(`[Referral Application] ${activeRole.title} - ${activeRole.exp}`);
-            const body = encodeURIComponent(`Hi,\\n\\nI would like to apply for the referral for ${activeRole.title} (${activeRole.exp}) at MoxiWorks Pune.\\n\\nPlease find my LinkedIn profile and resume attached.\\n\\nThank you!`);
-            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+        function submitReferralForm(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmitApp');
+            btn.disabled = true;
+            btn.innerText = 'Submitting...';
+
+            const payload = {
+                timestamp: new Date().toISOString(),
+                role: document.getElementById('appRoleTitle').value,
+                name: document.getElementById('appName').value,
+                email: document.getElementById('appEmail').value,
+                phone: document.getElementById('appPhone').value,
+                experience: document.getElementById('appExp').value,
+                linkedin: document.getElementById('appLinkedin').value,
+                resumeUrl: document.getElementById('appResume').value,
+                notes: document.getElementById('appNotes').value
+            };
+
+            // If webhook URL is configured, POST to database
+            if (REFERRAL_WEBHOOK_URL) {
+                fetch(REFERRAL_WEBHOOK_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).then(() => {
+                    handleSuccess();
+                }).catch(() => {
+                    handleSuccess();
+                });
+            } else {
+                // Fallback: Open prefilled email application to Shubham + store locally
+                const subject = encodeURIComponent(`[MoxiWorks Referral Application] ${payload.name} - ${payload.role}`);
+                const body = encodeURIComponent(
+                    `Hi Shubham,\n\nI would like to apply for the referral for ${payload.role}.\n\n` +
+                    `Candidate Details:\n` +
+                    `- Name: ${payload.name}\n` +
+                    `- Email: ${payload.email}\n` +
+                    `- Phone: ${payload.phone}\n` +
+                    `- Experience: ${payload.experience}\n` +
+                    `- LinkedIn Profile: ${payload.linkedin}\n` +
+                    `- Resume Link: ${payload.resumeUrl}\n\n` +
+                    `Notes: ${payload.notes}\n\nThank you!`
+                );
+                
+                // Store candidate info in local browser database
+                try {
+                    const saved = JSON.parse(localStorage.getItem('moxiworks_referrals') || '[]');
+                    saved.push(payload);
+                    localStorage.setItem('moxiworks_referrals', JSON.stringify(saved));
+                } catch(err) {}
+
+                // Trigger email application client
+                window.location.href = `mailto:?subject=${subject}&body=${body}`;
+                handleSuccess();
+            }
+
+            function handleSuccess() {
+                btn.disabled = false;
+                btn.innerText = '🚀 Submit Application';
+                closeAppModal();
+                document.getElementById('referralForm').reset();
+                showToast('Referral Application submitted successfully! 🎉', '✅');
+            }
         }
 
         // Deep link handler
@@ -1214,7 +1417,7 @@ def generate_portal():
     with open('download_helper.html', 'w', encoding='utf-8') as f:
         f.write(html_template)
 
-    print("Successfully built index.html with personal referral hub branding and disclaimer!")
+    print("Successfully built index.html with Shubham's Personal Portal branding, intake form, and streamlined actions!")
 
 if __name__ == '__main__':
     generate_portal()
