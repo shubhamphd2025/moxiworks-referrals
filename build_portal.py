@@ -19,7 +19,7 @@ def format_role_body(raw_paras, role_meta):
         text = clean_dashes(p['text']).strip()
         is_bullet = p['is_bullet']
         
-        # Check if plain header noise
+        # Header noise
         if text.lower() == 'moxiworks' or (i < 3 and text.lower() == role_meta['title'].lower()):
             i += 1
             continue
@@ -117,8 +117,8 @@ def generate_portal():
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoxiWorks Referral Portal | Open Roles & Job Descriptions</title>
-    <meta name="description" content="Explore verified open job descriptions at MoxiWorks Pune. Public direct download and interactive job description viewer.">
+    <title>MoxiWorks Open Roles | Personal Referral Portal</title>
+    <meta name="description" content="Personal employee referral portal for open positions at MoxiWorks Pune. Direct public job description downloads and referral requests.">
     <link rel="icon" href="https://moxiworks.com/wp-content/uploads/2025/06/cropped-moxiworks-favicon-32x32.png" sizes="32x32" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -279,7 +279,7 @@ def generate_portal():
         .hero-desc {
             font-size: 1.1rem;
             color: #D3E7F0;
-            max-width: 660px;
+            max-width: 680px;
             margin: 0 auto;
             line-height: 1.6;
         }
@@ -856,27 +856,53 @@ def generate_portal():
             opacity: 1;
         }
 
-        /* Footer */
+        /* Footer & Disclaimer */
         footer {
             background-color: var(--moxi-navy);
             color: #CFE3EC;
-            padding: 3.5rem 1.5rem;
+            padding: 3.5rem 1.5rem 2.5rem;
             text-align: center;
         }
 
         .footer-content {
-            max-width: 600px;
+            max-width: 820px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .footer-logo {
             height: 28px;
             filter: brightness(0) invert(1);
             opacity: 0.9;
+        }
+
+        .disclaimer-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius-md);
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+        }
+
+        .disclaimer-heading {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--moxi-green);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .disclaimer-body {
+            font-size: 0.8rem;
+            color: #9DBBCA;
+            line-height: 1.6;
         }
 
         @media (max-width: 768px) {
@@ -895,7 +921,7 @@ def generate_portal():
         <div class="header-inner">
             <a href="https://moxiworks.com" target="_blank" class="brand-logo">
                 <img src="https://moxiworks.com/wp-content/uploads/2025/06/moxiworks-logo-dark.svg" alt="MoxiWorks Logo" class="logo-img" />
-                <span class="brand-pill">Referral Portal</span>
+                <span class="brand-pill">Personal Referral Hub</span>
             </a>
             <div class="header-meta">
                 <span>Active Roles: <strong>20 Positions</strong></span>
@@ -909,10 +935,10 @@ def generate_portal():
         <div class="hero-container">
             <div class="hero-badge">
                 <span class="dot"></span>
-                <span>MoxiWorks Pune Talent Network</span>
+                <span>Personal Employee Referral Portal for MoxiWorks Pune</span>
             </div>
-            <h1 class="hero-title">Join Our Team & <span class="highlight">Refer Talent</span></h1>
-            <p class="hero-desc">Explore verified open job descriptions across Engineering, Product, Design, Support, Marketing, and Finance. Read full descriptions or download JD documents directly.</p>
+            <h1 class="hero-title">Open Opportunities & <span class="highlight">Employee Referrals</span></h1>
+            <p class="hero-desc">Explore verified open job descriptions across Engineering, Product, Design, Support, Marketing, and Finance at MoxiWorks Pune. Read full role details or reach out for a direct employee referral.</p>
         </div>
     </section>
 
@@ -1006,7 +1032,6 @@ def generate_portal():
         '''
 
     # Modal, toast, scripts
-    # Sanitize roles payload for client JS
     client_roles = []
     for r in roles:
         client_roles.append({
@@ -1060,7 +1085,16 @@ def generate_portal():
     <footer>
         <div class="footer-content">
             <img src="https://moxiworks.com/wp-content/uploads/2025/06/moxiworks-logo-dark.svg" alt="MoxiWorks" class="footer-logo" />
-            <p style="font-size: 0.85rem; color: #9DBBCA;">© 2026 MoxiWorks. Internal Referral & Talent Acquisition Portal. Styled according to MoxiWorks Brand Guidelines.</p>
+            
+            <!-- Disclaimer Box -->
+            <div class="disclaimer-card">
+                <div class="disclaimer-heading">⚠️ Personal Employee Referral Disclaimer</div>
+                <p class="disclaimer-body">
+                    This is an independent, personal employee referral portal created exclusively to connect qualified candidates with open roles at MoxiWorks Pune. This website is not an official MoxiWorks corporate portal or career application site. All formal job applications, interviews, and hiring decisions are governed exclusively by official MoxiWorks talent acquisition teams and hiring managers. All company names, logos, and registered trademarks belong to their respective owners.
+                </p>
+            </div>
+
+            <p style="font-size: 0.8rem; color: #7B99A8;">© 2026 Personal Employee Referral Hub for MoxiWorks Pune. Maintained for community talent referral purposes.</p>
         </div>
     </footer>
 
@@ -1171,10 +1205,7 @@ def generate_portal():
 </body>
 </html>
 '''
-    # Clean any lingering em-dashes and en-dashes
     html_template = clean_dashes(html_template)
-    
-    # Assert zero special dashes
     assert '\u2014' not in html_template and '\u2013' not in html_template, 'Special dashes found!'
 
     with open('index.html', 'w', encoding='utf-8') as f:
@@ -1183,7 +1214,7 @@ def generate_portal():
     with open('download_helper.html', 'w', encoding='utf-8') as f:
         f.write(html_template)
 
-    print("Successfully built index.html with validated rich JD formatting and 0 em-dashes!")
+    print("Successfully built index.html with personal referral hub branding and disclaimer!")
 
 if __name__ == '__main__':
     generate_portal()
