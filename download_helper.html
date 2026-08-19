@@ -194,17 +194,6 @@
             flex-wrap: wrap;
         }
 
-        .portal-banner-text {
-            display: flex;
-            align-items: center;
-            gap: 0.85rem;
-        }
-
-        .portal-banner-icon {
-            font-size: 1.6rem;
-            flex-shrink: 0;
-        }
-
         .portal-banner-text h4 {
             font-size: 0.95rem;
             font-weight: 700;
@@ -244,18 +233,22 @@
             min-width: 280px;
         }
 
-        .search-icon {
+        .search-icon-svg {
             position: absolute;
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-light);
+            width: 16px;
+            height: 16px;
+            stroke: var(--text-light);
+            fill: none;
+            stroke-width: 2;
             pointer-events: none;
         }
 
         .search-input {
             width: 100%;
-            padding: 0.8rem 1rem 0.8rem 2.75rem;
+            padding: 0.8rem 1rem 0.8rem 2.6rem;
             border: 1.5px solid var(--border-color);
             border-radius: var(--radius-full);
             font-size: 0.95rem;
@@ -415,10 +408,7 @@
         .location-tag {
             font-size: 0.75rem;
             color: var(--text-muted);
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
+            font-weight: 600;
         }
 
         .job-title {
@@ -444,7 +434,7 @@
             font-weight: 500;
         }
 
-        /* Card Actions - Streamlined */
+        /* Card Actions */
         .card-actions {
             display: flex;
             align-items: center;
@@ -466,7 +456,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.4rem;
             transition: all 0.2s ease;
         }
 
@@ -487,7 +476,7 @@
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
+            justify-content: center;
             transition: all 0.2s ease;
             white-space: nowrap;
         }
@@ -509,7 +498,8 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s ease;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 700;
             flex-shrink: 0;
         }
 
@@ -517,6 +507,16 @@
             border-color: var(--moxi-denim);
             color: var(--moxi-denim);
             background-color: var(--moxi-pale-blue);
+        }
+
+        .icon-svg {
+            width: 15px;
+            height: 15px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         /* Modal JD Reader & Rich Formatting */
@@ -707,7 +707,7 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
             box-shadow: 0 4px 14px rgba(134, 245, 154, 0.45);
             transition: all 0.2s ease;
         }
@@ -753,7 +753,7 @@
             color: #e53e3e;
         }
 
-        .form-input, .form-textarea, .form-select {
+        .form-input, .form-textarea {
             width: 100%;
             padding: 0.75rem 1rem;
             border: 1.5px solid var(--border-color);
@@ -765,7 +765,7 @@
             transition: all 0.2s ease;
         }
 
-        .form-input:focus, .form-textarea:focus, .form-select:focus {
+        .form-input:focus, .form-textarea:focus {
             outline: none;
             border-color: var(--moxi-denim);
             background-color: #FFFFFF;
@@ -842,9 +842,6 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 0.4rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
         }
 
         .disclaimer-body {
@@ -895,14 +892,11 @@
         <!-- Referral Pipeline Banner -->
         <div class="portal-banner">
             <div class="portal-banner-text">
-                <div class="portal-banner-icon">💼</div>
-                <div>
-                    <h4>How Referral Applications Work</h4>
-                    <p>Select any role below to review the full job description. Click <strong>Apply for Referral</strong> to submit your profile and resume directly into Shubham's referral database.</p>
-                </div>
+                <h4>How Referral Applications Work</h4>
+                <p>Select any role below to review the full job description. Click <strong>Apply for Referral</strong> to submit your profile and resume directly into Shubham's referral database.</p>
             </div>
             <button class="pill" style="background-color: var(--moxi-pale-blue); color: var(--moxi-denim); font-weight: 700; border-color: var(--border-hover);" onclick="copyPortalLink()">
-                🔗 Share Portal Link
+                Share Portal Link
             </button>
         </div>
 
@@ -910,7 +904,7 @@
         <div class="control-box">
             <div class="search-row">
                 <div class="search-wrapper">
-                    <span class="search-icon">🔍</span>
+                    <svg class="search-icon-svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                     <input type="text" id="searchInput" class="search-input" placeholder="Search roles by skill (e.g. Ruby, React, QA, Cypress, WordPress, PM, RevOps)..." oninput="filterRoles()" />
                 </div>
             </div>
@@ -918,17 +912,17 @@
             <!-- Filter Pills -->
             <div class="filter-pills">
                 <button class="pill active" onclick="setCategory('all', this)">All Roles <span class="pill-count">20</span></button>
-                <button class="pill" onclick="setCategory('engineering', this)">💻 Engineering <span class="pill-count">10</span></button>
-                <button class="pill" onclick="setCategory('product', this)">🎯 Product & Design <span class="pill-count">3</span></button>
-                <button class="pill" onclick="setCategory('support', this)">🤝 Customer Success <span class="pill-count">3</span></button>
-                <button class="pill" onclick="setCategory('marketing', this)">📈 Marketing <span class="pill-count">3</span></button>
-                <button class="pill" onclick="setCategory('finance', this)">💰 Finance <span class="pill-count">1</span></button>
+                <button class="pill" onclick="setCategory('engineering', this)">Engineering <span class="pill-count">10</span></button>
+                <button class="pill" onclick="setCategory('product', this)">Product & Design <span class="pill-count">3</span></button>
+                <button class="pill" onclick="setCategory('support', this)">Customer Success <span class="pill-count">3</span></button>
+                <button class="pill" onclick="setCategory('marketing', this)">Marketing <span class="pill-count">3</span></button>
+                <button class="pill" onclick="setCategory('finance', this)">Finance <span class="pill-count">1</span></button>
             </div>
         </div>
 
         <section class="category-group" data-category-group="engineering">
             <div class="category-header">
-                <h2 class="category-title">💻 Engineering & Technology</h2>
+                <h2 class="category-title">Engineering & Technology</h2>
                 <span class="category-badge">10 Open Roles</span>
             </div>
             <div class="jobs-grid">
@@ -938,8 +932,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Engineering</span>
-                            <span class="exp-tag">⭐ 10+ Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">10+ Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">Director of Engineering</h3>
                         <div class="skills-list">
@@ -948,12 +942,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('director-of-engineering')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('director-of-engineering')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('director-of-engineering')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('director-of-engineering')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -962,8 +958,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Engineering</span>
-                            <span class="exp-tag">⭐ 3-5 Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">3-5 Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">Software Engineer (RoR)</h3>
                         <div class="skills-list">
@@ -972,12 +968,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('software-engineer-ror')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('software-engineer-ror')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('software-engineer-ror')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('software-engineer-ror')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -986,8 +984,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Engineering</span>
-                            <span class="exp-tag">⭐ 5-7 Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">5-7 Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">Senior Software Engineer (RoR)</h3>
                         <div class="skills-list">
@@ -996,12 +994,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('senior-software-engineer-ror')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('senior-software-engineer-ror')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('senior-software-engineer-ror')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('senior-software-engineer-ror')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1010,8 +1010,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Engineering</span>
-                            <span class="exp-tag">⭐ 10+ Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">10+ Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">Engineering Manager (RoR)</h3>
                         <div class="skills-list">
@@ -1020,12 +1020,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('engineering-manager-ror')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('engineering-manager-ror')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('engineering-manager-ror')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('engineering-manager-ror')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1034,8 +1036,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Engineering</span>
-                            <span class="exp-tag">⭐ 3-5 Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">3-5 Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">React Developer</h3>
                         <div class="skills-list">
@@ -1044,12 +1046,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('react-developer')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('react-developer')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('react-developer')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('react-developer')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1058,8 +1062,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Engineering</span>
-                            <span class="exp-tag">⭐ 7+ Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">7+ Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">Senior React Developer</h3>
                         <div class="skills-list">
@@ -1068,12 +1072,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('senior-react-developer')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('senior-react-developer')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('senior-react-developer')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('senior-react-developer')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1082,8 +1088,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Engineering</span>
-                            <span class="exp-tag">⭐ 3-6 Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">3-6 Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">Software Engineer - PHP / WordPress</h3>
                         <div class="skills-list">
@@ -1092,12 +1098,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('software-engineer-php-wordpress')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('software-engineer-php-wordpress')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('software-engineer-php-wordpress')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('software-engineer-php-wordpress')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1106,8 +1114,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Engineering</span>
-                            <span class="exp-tag">⭐ 8+ Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">8+ Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">Lead Engineer - PHP / WordPress</h3>
                         <div class="skills-list">
@@ -1116,12 +1124,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('lead-engineer-php-wordpress')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('lead-engineer-php-wordpress')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('lead-engineer-php-wordpress')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('lead-engineer-php-wordpress')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1130,8 +1140,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Engineering</span>
-                            <span class="exp-tag">⭐ 3-5 Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">3-5 Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">QA Automation Engineer (Cypress)</h3>
                         <div class="skills-list">
@@ -1140,12 +1150,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('qa-automation')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('qa-automation')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('qa-automation')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('qa-automation')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1154,8 +1166,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Engineering</span>
-                            <span class="exp-tag">⭐ 3+ Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">3+ Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">AP Support Engineer</h3>
                         <div class="skills-list">
@@ -1164,12 +1176,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('ap-support-engineer')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('ap-support-engineer')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('ap-support-engineer')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('ap-support-engineer')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1178,7 +1192,7 @@
         
         <section class="category-group" data-category-group="product">
             <div class="category-header">
-                <h2 class="category-title">🎯 Product Management & Design</h2>
+                <h2 class="category-title">Product Management & Design</h2>
                 <span class="category-badge">3 Open Roles</span>
             </div>
             <div class="jobs-grid">
@@ -1188,8 +1202,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Product Management</span>
-                            <span class="exp-tag">⭐ 6+ Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">6+ Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">Technical Program Manager</h3>
                         <div class="skills-list">
@@ -1198,12 +1212,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('technical-program-manager')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('technical-program-manager')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('technical-program-manager')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('technical-program-manager')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1212,8 +1228,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Product Management</span>
-                            <span class="exp-tag">⭐ 7+ Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">7+ Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">Senior Product Manager</h3>
                         <div class="skills-list">
@@ -1222,12 +1238,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('senior-product-manager')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('senior-product-manager')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('senior-product-manager')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('senior-product-manager')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1236,8 +1254,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Product Management</span>
-                            <span class="exp-tag">⭐ 6+ Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">6+ Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">UX Designer (Senior Product Designer)</h3>
                         <div class="skills-list">
@@ -1246,12 +1264,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('ux-designer')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('ux-designer')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('ux-designer')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('ux-designer')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1260,7 +1280,7 @@
         
         <section class="category-group" data-category-group="support">
             <div class="category-header">
-                <h2 class="category-title">🤝 Customer Success & Support</h2>
+                <h2 class="category-title">Customer Success & Support</h2>
                 <span class="category-badge">3 Open Roles</span>
             </div>
             <div class="jobs-grid">
@@ -1270,8 +1290,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Customer Success</span>
-                            <span class="exp-tag">⭐ 2-4 Years</span>
-                            <span class="location-tag">📍 Pune / Remote India</span>
+                            <span class="exp-tag">2-4 Years</span>
+                            <span class="location-tag">Pune / Remote India</span>
                         </div>
                         <h3 class="job-title">Customer Support Engineer</h3>
                         <div class="skills-list">
@@ -1280,12 +1300,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('customer-support-engineer')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('customer-support-engineer')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('customer-support-engineer')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('customer-support-engineer')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1294,8 +1316,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Customer Success</span>
-                            <span class="exp-tag">⭐ 2+ Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">2+ Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">Onboarding QA Specialist</h3>
                         <div class="skills-list">
@@ -1304,12 +1326,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('onboarding-qa')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('onboarding-qa')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('onboarding-qa')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('onboarding-qa')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1318,8 +1342,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Customer Success</span>
-                            <span class="exp-tag">⭐ 2+ Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">2+ Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">Implementation Specialist</h3>
                         <div class="skills-list">
@@ -1328,12 +1352,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('implementation-specialist')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('implementation-specialist')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('implementation-specialist')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('implementation-specialist')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1342,7 +1368,7 @@
         
         <section class="category-group" data-category-group="marketing">
             <div class="category-header">
-                <h2 class="category-title">📈 Marketing & Operations</h2>
+                <h2 class="category-title">Marketing & Operations</h2>
                 <span class="category-badge">3 Open Roles</span>
             </div>
             <div class="jobs-grid">
@@ -1352,8 +1378,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Marketing</span>
-                            <span class="exp-tag">⭐ 1-3 Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">1-3 Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">Digital Marketing Specialist</h3>
                         <div class="skills-list">
@@ -1362,12 +1388,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('digital-marketing-specialist')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('digital-marketing-specialist')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('digital-marketing-specialist')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('digital-marketing-specialist')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1376,8 +1404,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Marketing</span>
-                            <span class="exp-tag">⭐ 5+ Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">5+ Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">Marketing Operations Specialist</h3>
                         <div class="skills-list">
@@ -1386,12 +1414,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('marketing-operations-specialist')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('marketing-operations-specialist')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('marketing-operations-specialist')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('marketing-operations-specialist')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1400,8 +1430,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Marketing</span>
-                            <span class="exp-tag">⭐ 4-8 Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">4-8 Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">Revenue Operations Analyst</h3>
                         <div class="skills-list">
@@ -1410,12 +1440,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('revenue-operations-analyst')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('revenue-operations-analyst')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('revenue-operations-analyst')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('revenue-operations-analyst')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1424,7 +1456,7 @@
         
         <section class="category-group" data-category-group="finance">
             <div class="category-header">
-                <h2 class="category-title">💰 Finance & Accounting</h2>
+                <h2 class="category-title">Finance & Accounting</h2>
                 <span class="category-badge">1 Open Role</span>
             </div>
             <div class="jobs-grid">
@@ -1434,8 +1466,8 @@
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">Finance</span>
-                            <span class="exp-tag">⭐ 5+ Years</span>
-                            <span class="location-tag">📍 Pune, India</span>
+                            <span class="exp-tag">5+ Years</span>
+                            <span class="location-tag">Pune, India</span>
                         </div>
                         <h3 class="job-title">Senior Accountant</h3>
                         <div class="skills-list">
@@ -1444,12 +1476,14 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('senior-accountant')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('senior-accountant')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('senior-accountant')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('senior-accountant')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             
@@ -1466,7 +1500,7 @@
                     <h2 id="modalTitle">Job Title</h2>
                     <div class="modal-header-tags">
                         <span id="modalExp" class="tag">Exp: 5+ Years</span>
-                        <span id="modalLoc" class="tag">📍 Pune, India</span>
+                        <span id="modalLoc" class="tag">Pune, India</span>
                         <span id="modalDept" class="tag">Engineering</span>
                     </div>
                 </div>
@@ -1477,10 +1511,10 @@
             </div>
             <div class="modal-footer">
                 <button class="btn-view-jd" style="max-width: 180px;" onclick="closeJdModal()">
-                    ← Back to Roles
+                    Back to Roles
                 </button>
                 <button id="modalApplyBtn" class="btn-cta-green" onclick="switchFromJdToApp()">
-                    <span>🚀</span> Apply for Referral
+                    Apply for Referral
                 </button>
             </div>
         </div>
@@ -1533,12 +1567,10 @@
                     <label class="form-label">Upload Resume (.pdf, .docx, .doc - max 5 MB) <span class="req">*</span></label>
                     <div id="dropZone" style="border: 2px dashed var(--border-color); background-color: var(--moxi-light-bg); border-radius: var(--radius-md); padding: 1.25rem 1rem; text-align: center; cursor: pointer; transition: all 0.2s ease;" onclick="document.getElementById('appResumeFile').click()">
                         <div id="uploadPrompt">
-                            <span style="font-size: 1.75rem; display: block; margin-bottom: 0.35rem;">📄</span>
-                            <span style="font-size: 0.9rem; font-weight: 700; color: var(--moxi-navy);">Click to upload your resume</span>
-                            <span style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Supported formats: PDF, DOCX, DOC (Max file size: 5 MB)</span>
+                            <span style="font-size: 0.9rem; font-weight: 700; color: var(--moxi-navy); display: block;">Click or drag your resume file here</span>
+                            <span style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Supported formats: PDF, DOCX, DOC (Maximum file size: 5 MB)</span>
                         </div>
                         <div id="fileSelectedBadge" style="display: none; align-items: center; justify-content: center; gap: 0.75rem;">
-                            <span style="font-size: 1.4rem;">📎</span>
                             <div style="text-align: left;">
                                 <div id="displayFileName" style="font-weight: 700; color: var(--moxi-navy); font-size: 0.9rem;">resume.pdf</div>
                                 <div id="displayFileSize" style="font-size: 0.75rem; color: #167a3f; font-weight: 600;">1.2 MB</div>
@@ -1564,7 +1596,7 @@
                 <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 0.75rem;">
                     <button type="button" class="btn-view-jd" style="max-width: 130px;" onclick="closeAppModal()">Cancel</button>
                     <button type="submit" id="btnSubmitApp" class="btn-cta-green">
-                        <span>🚀</span> Submit Application
+                        Submit Application
                     </button>
                 </div>
             </form>
@@ -1573,8 +1605,7 @@
 
     <!-- Toast Notification -->
     <div id="toast" class="toast">
-        <span id="toastIcon">📋</span>
-        <span id="toastMsg">Link copied!</span>
+        <span id="toastMsg">Notification message</span>
     </div>
 
     <!-- Footer -->
@@ -1584,7 +1615,7 @@
             
             <!-- Disclaimer Box -->
             <div class="disclaimer-card">
-                <div class="disclaimer-heading">⚠️ Personal Employee Referral Disclaimer</div>
+                <div class="disclaimer-heading">Personal Employee Referral Disclaimer</div>
                 <p class="disclaimer-body">
                     This is an independent, personal employee referral portal created by Shubham exclusively to connect qualified candidates with open positions at MoxiWorks Pune. This website is not an official MoxiWorks corporate portal or career application site. All formal job applications, interviews, and hiring decisions are governed exclusively by official MoxiWorks talent acquisition teams and hiring managers. All company names, logos, and registered trademarks belong to their respective owners.
                 </p>
@@ -1603,10 +1634,9 @@
         // Shubham's Live Google Apps Script Webhook URL
         const REFERRAL_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxjew8Mt4J4pZITZ8OzZFYeKMHBkWr_oYnFVVhUj-1kk35iyofMFB7A-sKfNDrqO1uY/exec';
 
-        function showToast(msg, icon = '📋') {
+        function showToast(msg) {
             const t = document.getElementById('toast');
             document.getElementById('toastMsg').innerText = msg;
-            document.getElementById('toastIcon').innerText = icon;
             t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), 3500);
         }
@@ -1651,7 +1681,7 @@
 
             document.getElementById('modalTitle').innerText = r.title;
             document.getElementById('modalExp').innerText = `Exp: ${r.exp}`;
-            document.getElementById('modalLoc').innerText = `📍 ${r.location}`;
+            document.getElementById('modalLoc').innerText = r.location;
             document.getElementById('modalDept').innerText = r.dept;
             
             document.getElementById('modalBody').innerHTML = r.formatted_html;
@@ -1692,13 +1722,13 @@
         function copyRoleLink(roleId) {
             const url = `${window.location.origin}${window.location.pathname}#${roleId}`;
             navigator.clipboard.writeText(url).then(() => {
-                showToast('Role link copied to clipboard!', '🔗');
+                showToast('Role link copied to clipboard.');
             });
         }
 
         function copyPortalLink() {
             navigator.clipboard.writeText(window.location.href).then(() => {
-                showToast('Portal link copied to clipboard!', '🚀');
+                showToast('Portal link copied to clipboard.');
             });
         }
 
@@ -1739,7 +1769,7 @@
             const badge = document.getElementById('fileSelectedBadge');
             badge.style.display = 'flex';
             document.getElementById('displayFileName').innerText = file.name;
-            document.getElementById('displayFileSize').innerText = `✓ ${(file.size / 1024).toFixed(1)} KB (Ready to submit)`;
+            document.getElementById('displayFileSize').innerText = `${(file.size / 1024).toFixed(1)} KB (Ready to submit)`;
             dropZone.style.borderColor = '#167a3f';
             dropZone.style.backgroundColor = '#F0FFF4';
         }
@@ -1800,11 +1830,11 @@
 
             function handleSuccess() {
                 btn.disabled = false;
-                btn.innerText = '🚀 Submit Application';
+                btn.innerText = 'Submit Application';
                 closeAppModal();
                 document.getElementById('referralForm').reset();
                 removeSelectedFile();
-                showToast('Referral Application submitted successfully! 🎉', '✅');
+                showToast('Referral Application submitted successfully.');
             }
         }
 

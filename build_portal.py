@@ -308,17 +308,6 @@ def generate_portal():
             flex-wrap: wrap;
         }
 
-        .portal-banner-text {
-            display: flex;
-            align-items: center;
-            gap: 0.85rem;
-        }
-
-        .portal-banner-icon {
-            font-size: 1.6rem;
-            flex-shrink: 0;
-        }
-
         .portal-banner-text h4 {
             font-size: 0.95rem;
             font-weight: 700;
@@ -358,18 +347,22 @@ def generate_portal():
             min-width: 280px;
         }
 
-        .search-icon {
+        .search-icon-svg {
             position: absolute;
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-light);
+            width: 16px;
+            height: 16px;
+            stroke: var(--text-light);
+            fill: none;
+            stroke-width: 2;
             pointer-events: none;
         }
 
         .search-input {
             width: 100%;
-            padding: 0.8rem 1rem 0.8rem 2.75rem;
+            padding: 0.8rem 1rem 0.8rem 2.6rem;
             border: 1.5px solid var(--border-color);
             border-radius: var(--radius-full);
             font-size: 0.95rem;
@@ -529,10 +522,7 @@ def generate_portal():
         .location-tag {
             font-size: 0.75rem;
             color: var(--text-muted);
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
+            font-weight: 600;
         }
 
         .job-title {
@@ -558,7 +548,7 @@ def generate_portal():
             font-weight: 500;
         }
 
-        /* Card Actions - Streamlined */
+        /* Card Actions */
         .card-actions {
             display: flex;
             align-items: center;
@@ -580,7 +570,6 @@ def generate_portal():
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.4rem;
             transition: all 0.2s ease;
         }
 
@@ -601,7 +590,7 @@ def generate_portal():
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
+            justify-content: center;
             transition: all 0.2s ease;
             white-space: nowrap;
         }
@@ -623,7 +612,8 @@ def generate_portal():
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s ease;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 700;
             flex-shrink: 0;
         }
 
@@ -631,6 +621,16 @@ def generate_portal():
             border-color: var(--moxi-denim);
             color: var(--moxi-denim);
             background-color: var(--moxi-pale-blue);
+        }
+
+        .icon-svg {
+            width: 15px;
+            height: 15px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         /* Modal JD Reader & Rich Formatting */
@@ -821,7 +821,7 @@ def generate_portal():
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
             box-shadow: 0 4px 14px rgba(134, 245, 154, 0.45);
             transition: all 0.2s ease;
         }
@@ -867,7 +867,7 @@ def generate_portal():
             color: #e53e3e;
         }
 
-        .form-input, .form-textarea, .form-select {
+        .form-input, .form-textarea {
             width: 100%;
             padding: 0.75rem 1rem;
             border: 1.5px solid var(--border-color);
@@ -879,7 +879,7 @@ def generate_portal():
             transition: all 0.2s ease;
         }
 
-        .form-input:focus, .form-textarea:focus, .form-select:focus {
+        .form-input:focus, .form-textarea:focus {
             outline: none;
             border-color: var(--moxi-denim);
             background-color: #FFFFFF;
@@ -956,9 +956,6 @@ def generate_portal():
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 0.4rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
         }
 
         .disclaimer-body {
@@ -1009,14 +1006,11 @@ def generate_portal():
         <!-- Referral Pipeline Banner -->
         <div class="portal-banner">
             <div class="portal-banner-text">
-                <div class="portal-banner-icon">💼</div>
-                <div>
-                    <h4>How Referral Applications Work</h4>
-                    <p>Select any role below to review the full job description. Click <strong>Apply for Referral</strong> to submit your profile and resume directly into Shubham's referral database.</p>
-                </div>
+                <h4>How Referral Applications Work</h4>
+                <p>Select any role below to review the full job description. Click <strong>Apply for Referral</strong> to submit your profile and resume directly into Shubham's referral database.</p>
             </div>
             <button class="pill" style="background-color: var(--moxi-pale-blue); color: var(--moxi-denim); font-weight: 700; border-color: var(--border-hover);" onclick="copyPortalLink()">
-                🔗 Share Portal Link
+                Share Portal Link
             </button>
         </div>
 
@@ -1024,7 +1018,7 @@ def generate_portal():
         <div class="control-box">
             <div class="search-row">
                 <div class="search-wrapper">
-                    <span class="search-icon">🔍</span>
+                    <svg class="search-icon-svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                     <input type="text" id="searchInput" class="search-input" placeholder="Search roles by skill (e.g. Ruby, React, QA, Cypress, WordPress, PM, RevOps)..." oninput="filterRoles()" />
                 </div>
             </div>
@@ -1032,22 +1026,22 @@ def generate_portal():
             <!-- Filter Pills -->
             <div class="filter-pills">
                 <button class="pill active" onclick="setCategory('all', this)">All Roles <span class="pill-count">20</span></button>
-                <button class="pill" onclick="setCategory('engineering', this)">💻 Engineering <span class="pill-count">10</span></button>
-                <button class="pill" onclick="setCategory('product', this)">🎯 Product & Design <span class="pill-count">3</span></button>
-                <button class="pill" onclick="setCategory('support', this)">🤝 Customer Success <span class="pill-count">3</span></button>
-                <button class="pill" onclick="setCategory('marketing', this)">📈 Marketing <span class="pill-count">3</span></button>
-                <button class="pill" onclick="setCategory('finance', this)">💰 Finance <span class="pill-count">1</span></button>
+                <button class="pill" onclick="setCategory('engineering', this)">Engineering <span class="pill-count">10</span></button>
+                <button class="pill" onclick="setCategory('product', this)">Product & Design <span class="pill-count">3</span></button>
+                <button class="pill" onclick="setCategory('support', this)">Customer Success <span class="pill-count">3</span></button>
+                <button class="pill" onclick="setCategory('marketing', this)">Marketing <span class="pill-count">3</span></button>
+                <button class="pill" onclick="setCategory('finance', this)">Finance <span class="pill-count">1</span></button>
             </div>
         </div>
 '''
 
     # Categories
     categories = [
-        ('engineering', '💻 Engineering & Technology', '10 Open Roles'),
-        ('product', '🎯 Product Management & Design', '3 Open Roles'),
-        ('support', '🤝 Customer Success & Support', '3 Open Roles'),
-        ('marketing', '📈 Marketing & Operations', '3 Open Roles'),
-        ('finance', '💰 Finance & Accounting', '1 Open Role')
+        ('engineering', 'Engineering & Technology', '10 Open Roles'),
+        ('product', 'Product Management & Design', '3 Open Roles'),
+        ('support', 'Customer Success & Support', '3 Open Roles'),
+        ('marketing', 'Marketing & Operations', '3 Open Roles'),
+        ('finance', 'Finance & Accounting', '1 Open Role')
     ]
 
     for cat_id, cat_title, cat_badge in categories:
@@ -1068,8 +1062,8 @@ def generate_portal():
                     <div class="card-top">
                         <div class="tag-row">
                             <span class="dept-tag">{r['dept'].split('&')[0].strip()}</span>
-                            <span class="exp-tag">⭐ {r['exp']}</span>
-                            <span class="location-tag">📍 {r['location']}</span>
+                            <span class="exp-tag">{r['exp']}</span>
+                            <span class="location-tag">{r['location']}</span>
                         </div>
                         <h3 class="job-title">{r['title']}</h3>
                         <div class="skills-list">
@@ -1078,12 +1072,14 @@ def generate_portal():
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('{r['id']}')">
-                            <span>👁️</span> View Role Details
+                            View Role Details
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('{r['id']}')">
-                            <span>🚀</span> Apply for Referral
+                            Apply for Referral
                         </button>
-                        <button class="btn-icon" title="Share Role" onclick="copyRoleLink('{r['id']}')">🔗</button>
+                        <button class="btn-icon" title="Share Role Link" onclick="copyRoleLink('{r['id']}')">
+                            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        </button>
                     </div>
                 </article>
             '''
@@ -1116,7 +1112,7 @@ def generate_portal():
                     <h2 id="modalTitle">Job Title</h2>
                     <div class="modal-header-tags">
                         <span id="modalExp" class="tag">Exp: 5+ Years</span>
-                        <span id="modalLoc" class="tag">📍 Pune, India</span>
+                        <span id="modalLoc" class="tag">Pune, India</span>
                         <span id="modalDept" class="tag">Engineering</span>
                     </div>
                 </div>
@@ -1127,10 +1123,10 @@ def generate_portal():
             </div>
             <div class="modal-footer">
                 <button class="btn-view-jd" style="max-width: 180px;" onclick="closeJdModal()">
-                    ← Back to Roles
+                    Back to Roles
                 </button>
                 <button id="modalApplyBtn" class="btn-cta-green" onclick="switchFromJdToApp()">
-                    <span>🚀</span> Apply for Referral
+                    Apply for Referral
                 </button>
             </div>
         </div>
@@ -1183,12 +1179,10 @@ def generate_portal():
                     <label class="form-label">Upload Resume (.pdf, .docx, .doc - max 5 MB) <span class="req">*</span></label>
                     <div id="dropZone" style="border: 2px dashed var(--border-color); background-color: var(--moxi-light-bg); border-radius: var(--radius-md); padding: 1.25rem 1rem; text-align: center; cursor: pointer; transition: all 0.2s ease;" onclick="document.getElementById('appResumeFile').click()">
                         <div id="uploadPrompt">
-                            <span style="font-size: 1.75rem; display: block; margin-bottom: 0.35rem;">📄</span>
-                            <span style="font-size: 0.9rem; font-weight: 700; color: var(--moxi-navy);">Click to upload your resume</span>
-                            <span style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Supported formats: PDF, DOCX, DOC (Max file size: 5 MB)</span>
+                            <span style="font-size: 0.9rem; font-weight: 700; color: var(--moxi-navy); display: block;">Click or drag your resume file here</span>
+                            <span style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Supported formats: PDF, DOCX, DOC (Maximum file size: 5 MB)</span>
                         </div>
                         <div id="fileSelectedBadge" style="display: none; align-items: center; justify-content: center; gap: 0.75rem;">
-                            <span style="font-size: 1.4rem;">📎</span>
                             <div style="text-align: left;">
                                 <div id="displayFileName" style="font-weight: 700; color: var(--moxi-navy); font-size: 0.9rem;">resume.pdf</div>
                                 <div id="displayFileSize" style="font-size: 0.75rem; color: #167a3f; font-weight: 600;">1.2 MB</div>
@@ -1214,7 +1208,7 @@ def generate_portal():
                 <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 0.75rem;">
                     <button type="button" class="btn-view-jd" style="max-width: 130px;" onclick="closeAppModal()">Cancel</button>
                     <button type="submit" id="btnSubmitApp" class="btn-cta-green">
-                        <span>🚀</span> Submit Application
+                        Submit Application
                     </button>
                 </div>
             </form>
@@ -1223,8 +1217,7 @@ def generate_portal():
 
     <!-- Toast Notification -->
     <div id="toast" class="toast">
-        <span id="toastIcon">📋</span>
-        <span id="toastMsg">Link copied!</span>
+        <span id="toastMsg">Notification message</span>
     </div>
 
     <!-- Footer -->
@@ -1234,7 +1227,7 @@ def generate_portal():
             
             <!-- Disclaimer Box -->
             <div class="disclaimer-card">
-                <div class="disclaimer-heading">⚠️ Personal Employee Referral Disclaimer</div>
+                <div class="disclaimer-heading">Personal Employee Referral Disclaimer</div>
                 <p class="disclaimer-body">
                     This is an independent, personal employee referral portal created by Shubham exclusively to connect qualified candidates with open positions at MoxiWorks Pune. This website is not an official MoxiWorks corporate portal or career application site. All formal job applications, interviews, and hiring decisions are governed exclusively by official MoxiWorks talent acquisition teams and hiring managers. All company names, logos, and registered trademarks belong to their respective owners.
                 </p>
@@ -1253,10 +1246,9 @@ def generate_portal():
         // Shubham's Live Google Apps Script Webhook URL
         const REFERRAL_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxjew8Mt4J4pZITZ8OzZFYeKMHBkWr_oYnFVVhUj-1kk35iyofMFB7A-sKfNDrqO1uY/exec';
 
-        function showToast(msg, icon = '📋') {
+        function showToast(msg) {
             const t = document.getElementById('toast');
             document.getElementById('toastMsg').innerText = msg;
-            document.getElementById('toastIcon').innerText = icon;
             t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), 3500);
         }
@@ -1301,7 +1293,7 @@ def generate_portal():
 
             document.getElementById('modalTitle').innerText = r.title;
             document.getElementById('modalExp').innerText = `Exp: ${r.exp}`;
-            document.getElementById('modalLoc').innerText = `📍 ${r.location}`;
+            document.getElementById('modalLoc').innerText = r.location;
             document.getElementById('modalDept').innerText = r.dept;
             
             document.getElementById('modalBody').innerHTML = r.formatted_html;
@@ -1342,13 +1334,13 @@ def generate_portal():
         function copyRoleLink(roleId) {
             const url = `${window.location.origin}${window.location.pathname}#${roleId}`;
             navigator.clipboard.writeText(url).then(() => {
-                showToast('Role link copied to clipboard!', '🔗');
+                showToast('Role link copied to clipboard.');
             });
         }
 
         function copyPortalLink() {
             navigator.clipboard.writeText(window.location.href).then(() => {
-                showToast('Portal link copied to clipboard!', '🚀');
+                showToast('Portal link copied to clipboard.');
             });
         }
 
@@ -1389,7 +1381,7 @@ def generate_portal():
             const badge = document.getElementById('fileSelectedBadge');
             badge.style.display = 'flex';
             document.getElementById('displayFileName').innerText = file.name;
-            document.getElementById('displayFileSize').innerText = `✓ ${(file.size / 1024).toFixed(1)} KB (Ready to submit)`;
+            document.getElementById('displayFileSize').innerText = `${(file.size / 1024).toFixed(1)} KB (Ready to submit)`;
             dropZone.style.borderColor = '#167a3f';
             dropZone.style.backgroundColor = '#F0FFF4';
         }
@@ -1450,11 +1442,11 @@ def generate_portal():
 
             function handleSuccess() {
                 btn.disabled = false;
-                btn.innerText = '🚀 Submit Application';
+                btn.innerText = 'Submit Application';
                 closeAppModal();
                 document.getElementById('referralForm').reset();
                 removeSelectedFile();
-                showToast('Referral Application submitted successfully! 🎉', '✅');
+                showToast('Referral Application submitted successfully.');
             }
         }
 
@@ -1478,7 +1470,7 @@ def generate_portal():
     with open('download_helper.html', 'w', encoding='utf-8') as f:
         f.write(html_template)
 
-    print("Successfully built index.html with Shubham's Personal Portal branding, intake form, and streamlined actions!")
+    print("Successfully built index.html with clean, professional enterprise typography (0 emojis)!")
 
 if __name__ == '__main__':
     generate_portal()
