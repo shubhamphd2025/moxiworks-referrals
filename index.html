@@ -444,19 +444,21 @@
         }
 
         .btn-view-jd {
-            flex: 1;
+            flex: 0 0 auto;
+            min-width: 68px;
             background-color: var(--moxi-light-bg);
             border: 1.5px solid var(--border-color);
             color: var(--moxi-navy);
-            padding: 0.65rem 1rem;
+            padding: 0.65rem 1.15rem;
             font-size: 0.875rem;
             font-weight: 700;
             border-radius: var(--radius-md);
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
         .btn-view-jd:hover {
@@ -466,6 +468,7 @@
         }
 
         .btn-apply-direct {
+            flex: 1;
             background-color: var(--moxi-navy);
             color: #FFFFFF;
             border: none;
@@ -942,7 +945,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('director-of-engineering')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('director-of-engineering')">
                             Apply for Referral
@@ -968,7 +971,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('software-engineer-ror')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('software-engineer-ror')">
                             Apply for Referral
@@ -994,7 +997,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('senior-software-engineer-ror')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('senior-software-engineer-ror')">
                             Apply for Referral
@@ -1020,7 +1023,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('engineering-manager-ror')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('engineering-manager-ror')">
                             Apply for Referral
@@ -1046,7 +1049,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('react-developer')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('react-developer')">
                             Apply for Referral
@@ -1072,7 +1075,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('senior-react-developer')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('senior-react-developer')">
                             Apply for Referral
@@ -1098,7 +1101,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('software-engineer-php-wordpress')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('software-engineer-php-wordpress')">
                             Apply for Referral
@@ -1124,7 +1127,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('lead-engineer-php-wordpress')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('lead-engineer-php-wordpress')">
                             Apply for Referral
@@ -1150,7 +1153,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('qa-automation')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('qa-automation')">
                             Apply for Referral
@@ -1176,7 +1179,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('ap-support-engineer')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('ap-support-engineer')">
                             Apply for Referral
@@ -1212,7 +1215,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('technical-program-manager')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('technical-program-manager')">
                             Apply for Referral
@@ -1238,7 +1241,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('senior-product-manager')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('senior-product-manager')">
                             Apply for Referral
@@ -1264,7 +1267,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('ux-designer')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('ux-designer')">
                             Apply for Referral
@@ -1300,7 +1303,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('customer-support-engineer')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('customer-support-engineer')">
                             Apply for Referral
@@ -1326,7 +1329,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('onboarding-qa')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('onboarding-qa')">
                             Apply for Referral
@@ -1352,7 +1355,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('implementation-specialist')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('implementation-specialist')">
                             Apply for Referral
@@ -1388,7 +1391,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('digital-marketing-specialist')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('digital-marketing-specialist')">
                             Apply for Referral
@@ -1414,7 +1417,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('marketing-operations-specialist')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('marketing-operations-specialist')">
                             Apply for Referral
@@ -1440,7 +1443,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('revenue-operations-analyst')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('revenue-operations-analyst')">
                             Apply for Referral
@@ -1476,7 +1479,7 @@
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('senior-accountant')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('senior-accountant')">
                             Apply for Referral

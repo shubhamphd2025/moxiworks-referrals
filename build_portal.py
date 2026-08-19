@@ -558,19 +558,21 @@ def generate_portal():
         }
 
         .btn-view-jd {
-            flex: 1;
+            flex: 0 0 auto;
+            min-width: 68px;
             background-color: var(--moxi-light-bg);
             border: 1.5px solid var(--border-color);
             color: var(--moxi-navy);
-            padding: 0.65rem 1rem;
+            padding: 0.65rem 1.15rem;
             font-size: 0.875rem;
             font-weight: 700;
             border-radius: var(--radius-md);
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
         .btn-view-jd:hover {
@@ -580,6 +582,7 @@ def generate_portal():
         }
 
         .btn-apply-direct {
+            flex: 1;
             background-color: var(--moxi-navy);
             color: #FFFFFF;
             border: none;
@@ -1072,7 +1075,7 @@ def generate_portal():
                     </div>
                     <div class="card-actions">
                         <button class="btn-view-jd" onclick="openJdModal('{r['id']}')">
-                            View Role Details
+                            JD
                         </button>
                         <button class="btn-apply-direct" onclick="openAppModal('{r['id']}')">
                             Apply for Referral
