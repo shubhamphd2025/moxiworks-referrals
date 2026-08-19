@@ -1795,32 +1795,45 @@
             btn.disabled = true;
             btn.innerText = 'Submitting...';
 
-            const payload = {
-                timestamp: new Date().toISOString(),
-                role: document.getElementById('appRoleTitle').value,
-                name: document.getElementById('appName').value,
-                email: document.getElementById('appEmail').value,
-                phone: document.getElementById('appPhone').value,
-                experience: document.getElementById('appExp').value,
-                linkedin: document.getElementById('appLinkedin').value || '',
-                resumeUrl: `Attached Resume: ${attachedFile.name} (${(attachedFile.size / 1024).toFixed(1)} KB)`,
-                notes: document.getElementById('appNotes').value || ''
-            };
+            function sendPayload(fileBase64, fileName, fileType) {
+                const payload = {
+                    timestamp: new Date().toISOString(),
+                    role: document.getElementById('appRoleTitle').value,
+                    name: document.getElementById('appName').value,
+                    email: document.getElementById('appEmail').value,
+                    phone: document.getElementById('appPhone').value,
+                    experience: document.getElementById('appExp').value,
+                    linkedin: document.getElementById('appLinkedin').value || '',
+                    fileName: fileName || attachedFile.name,
+                    fileType: fileType || attachedFile.type,
+                    fileData: fileBase64 || '',
+                    notes: document.getElementById('appNotes').value || ''
+                };
 
-            if (REFERRAL_WEBHOOK_URL) {
-                fetch(REFERRAL_WEBHOOK_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                }).then(() => {
+                if (REFERRAL_WEBHOOK_URL) {
+                    fetch(REFERRAL_WEBHOOK_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    }).then(() => {
+                        handleSuccess();
+                    }).catch(() => {
+                        handleSuccess();
+                    });
+                } else {
                     handleSuccess();
-                }).catch(() => {
-                    handleSuccess();
-                });
-            } else {
-                handleSuccess();
+                }
             }
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                sendPayload(evt.target.result, attachedFile.name, attachedFile.type);
+            };
+            reader.onerror = function() {
+                sendPayload('', attachedFile.name, attachedFile.type);
+            };
+            reader.readAsDataURL(attachedFile);
 
             function handleSuccess() {
                 btn.disabled = false;
