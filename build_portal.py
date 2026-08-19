@@ -1180,14 +1180,20 @@ def generate_portal():
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Resume / CV Link (Google Drive / Dropbox / Cloud link) <span class="req">*</span></label>
-                    <input type="url" id="appResume" class="form-input" placeholder="https://drive.google.com/file/d/... (Make sure link is viewable)" required />
-                    <span class="form-helper">Please provide a publicly viewable link to your PDF resume (e.g. Google Drive, Dropbox, or OneDrive).</span>
+                    <label class="form-label">Upload Resume File (.pdf, .docx, .doc) <span class="req">*</span></label>
+                    <input type="file" id="appResumeFile" class="form-input" accept=".pdf,.doc,.docx" onchange="handleFileSelect(event)" style="padding: 0.55rem 0.75rem; background-color: #FFFFFF;" />
+                    <div id="fileUploadStatus" style="font-size: 0.75rem; color: #167a3f; font-weight: 600; margin-top: 0.2rem; display: none;">✓ File attached</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Or Paste Resume Link (Google Drive / Dropbox / Cloud link)</label>
+                    <input type="url" id="appResumeUrl" class="form-input" placeholder="https://drive.google.com/file/d/..." />
+                    <span class="form-helper">Either attach your resume file above OR paste a public Google Drive/cloud link.</span>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Brief Note / Highlights (Optional)</label>
-                    <textarea id="appNotes" class="form-textarea" rows="3" placeholder="Briefly highlight your key tech stack, major achievements, or why you are a great fit..."></textarea>
+                    <textarea id="appNotes" class="form-textarea" rows="2" placeholder="Briefly highlight your key tech stack, major achievements, or why you are a great fit..."></textarea>
                 </div>
 
                 <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 0.75rem;">
@@ -1227,9 +1233,11 @@ def generate_portal():
         const rolesData = ''' + json.dumps(client_roles) + ''';
         let currentCat = 'all';
         let activeRole = null;
+        let selectedFileBase64 = '';
+        let selectedFileName = '';
+        let selectedFileType = '';
 
-        // Custom Google Apps Script / Formspree webhook endpoint placeholder
-        // Shubham can paste his Google Apps Script Webhook URL here anytime!
+        // Webhook URL: Paste your Google Apps Script Webhook URL here!
         const REFERRAL_WEBHOOK_URL = '';
 
         function showToast(msg, icon = '📋') {
@@ -1331,9 +1339,37 @@ def generate_portal():
             });
         }
 
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            const status = document.getElementById('fileUploadStatus');
+            if (file) {
+                selectedFileName = file.name;
+                selectedFileType = file.type || 'application/pdf';
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    selectedFileBase64 = evt.target.result;
+                    status.style.display = 'block';
+                    status.innerText = `✓ Attached: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                selectedFileBase64 = '';
+                selectedFileName = '';
+                selectedFileType = '';
+                status.style.display = 'none';
+            }
+        }
+
         function submitReferralForm(e) {
             e.preventDefault();
             const btn = document.getElementById('btnSubmitApp');
+
+            const resumeLink = document.getElementById('appResumeUrl').value.trim();
+            if (!selectedFileBase64 && !resumeLink) {
+                alert('Please either attach your resume file or provide a cloud resume link.');
+                return;
+            }
+
             btn.disabled = true;
             btn.innerText = 'Submitting...';
 
@@ -1345,11 +1381,13 @@ def generate_portal():
                 phone: document.getElementById('appPhone').value,
                 experience: document.getElementById('appExp').value,
                 linkedin: document.getElementById('appLinkedin').value,
-                resumeUrl: document.getElementById('appResume').value,
+                resumeUrl: resumeLink,
+                fileName: selectedFileName,
+                fileType: selectedFileType,
+                fileData: selectedFileBase64,
                 notes: document.getElementById('appNotes').value
             };
 
-            // If webhook URL is configured, POST to database
             if (REFERRAL_WEBHOOK_URL) {
                 fetch(REFERRAL_WEBHOOK_URL, {
                     method: 'POST',
@@ -1362,7 +1400,7 @@ def generate_portal():
                     handleSuccess();
                 });
             } else {
-                // Fallback: Open prefilled email application to Shubham + store locally
+                // Fallback email draft trigger
                 const subject = encodeURIComponent(`[MoxiWorks Referral Application] ${payload.name} - ${payload.role}`);
                 const body = encodeURIComponent(
                     `Hi Shubham,\n\nI would like to apply for the referral for ${payload.role}.\n\n` +
@@ -1372,18 +1410,16 @@ def generate_portal():
                     `- Phone: ${payload.phone}\n` +
                     `- Experience: ${payload.experience}\n` +
                     `- LinkedIn Profile: ${payload.linkedin}\n` +
-                    `- Resume Link: ${payload.resumeUrl}\n\n` +
+                    `- Resume Link: ${payload.resumeUrl || '(File attached)'}\n\n` +
                     `Notes: ${payload.notes}\n\nThank you!`
                 );
                 
-                // Store candidate info in local browser database
                 try {
                     const saved = JSON.parse(localStorage.getItem('moxiworks_referrals') || '[]');
-                    saved.push(payload);
+                    saved.push({ ...payload, fileData: '' }); // save without large base64
                     localStorage.setItem('moxiworks_referrals', JSON.stringify(saved));
                 } catch(err) {}
 
-                // Trigger email application client
                 window.location.href = `mailto:?subject=${subject}&body=${body}`;
                 handleSuccess();
             }
@@ -1393,6 +1429,10 @@ def generate_portal():
                 btn.innerText = '🚀 Submit Application';
                 closeAppModal();
                 document.getElementById('referralForm').reset();
+                document.getElementById('fileUploadStatus').style.display = 'none';
+                selectedFileBase64 = '';
+                selectedFileName = '';
+                selectedFileType = '';
                 showToast('Referral Application submitted successfully! 🎉', '✅');
             }
         }

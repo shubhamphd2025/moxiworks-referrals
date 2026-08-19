@@ -1,54 +1,78 @@
-# Candidate Database & Referral Pipeline Setup Guide
+# Automated Resume Upload Pipeline (Google Drive + Google Sheets)
 
-This guide explains how to connect your personal referral portal directly to a **Google Sheets Database** (100% free, automated, and real-time).
-
----
-
-## 📊 Live Database Pipeline Architecture
-
-```
-[Candidate on LinkedIn]
-       ↓
-[Shubham's Referral Portal] 
-       ↓ (Clicks "Apply for Referral")
-[Interactive Intake Form Modal]
-       ↓ (Submits Name, Email, Phone, Exp, LinkedIn URL, Resume Link)
-[Google Apps Script Webhook]
-       ↓
-[Shubham's Private Google Sheet Database] + [Instant Email Notification to Shubham]
-```
+This document details how candidates can upload their **PDF/DOCX resume file directly**, and how it automatically gets saved into your **Google Drive** with a clickable link inserted into your **Google Sheet**.
 
 ---
 
-## ⚡ 2-Minute Google Sheets Setup Instructions
+## 🔄 How the Resume Upload Pipeline Works
+
+```
+1. Candidate clicks "Apply for Referral" on your portal
+                   ↓
+2. Candidate selects their Resume file (PDF / DOCX) from their computer/phone
+                   ↓
+3. The Portal converts the file to Base64 and sends it to your Webhook
+                   ↓
+4. Google Apps Script receives the payload:
+   ├── Creates/finds a folder in your Google Drive: "MoxiWorks Referral Resumes"
+   ├── Saves the resume file into that Drive folder
+   └── Inserts the candidate details + Clickable Drive Link into your Google Sheet!
+                   ↓
+5. You open Google Sheets: Click the link in column "Resume Link" to view their CV!
+```
+
+---
+
+## 📋 What Your Google Sheet Will Look Like
+
+| Timestamp | Role | Candidate Name | Email | Phone | Exp | LinkedIn | Resume (Clickable Link) | Notes |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `19/08/2026 17:15` | `Director of Engineering` | `Amit Verma` | `amit@...` | `+91 98...` | `11 Yrs` | `linkedin.com/in/...` | [📄 View Resume (PDF)](https://drive.google.com/file/d/...) | `Strong squad lead...` |
+
+---
+
+## ⚡ 3-Minute Setup Guide
 
 ### Step 1: Create a Google Sheet
-1. Open [sheets.new](https://sheets.new) in your browser.
-2. Name your spreadsheet: **`MoxiWorks Referral Applications`**.
-3. In **Row 1**, set up the following column headers:
-   - `A1`: **Timestamp**
-   - `B1`: **Role**
-   - `C1`: **Candidate Name**
-   - `D1`: **Email**
-   - `E1`: **Phone**
-   - `F1`: **Experience**
-   - `G1`: **LinkedIn Profile**
-   - `H1`: **Resume Link**
-   - `I1`: **Notes**
+1. Open **[sheets.new](https://sheets.new)**.
+2. Name it **`MoxiWorks Referral Applications`**.
+3. In Row 1, add these headers:
+   `A1`: **Timestamp** | `B1`: **Role** | `C1`: **Name** | `D1`: **Email** | `E1`: **Phone** | `F1`: **Experience** | `G1`: **LinkedIn** | `H1`: **Resume Link** | `I1`: **Notes**
 
 ---
 
-### Step 2: Add the Google Apps Script Webhook
-1. In your Google Sheet, click **Extensions** → **Apps Script** (top menu).
-2. Delete any default code and paste the following script:
+### Step 2: Add the Google Apps Script Code
+1. In your Google Sheet, click **Extensions** → **Apps Script**.
+2. Replace all code with this complete file-uploader script:
 
 ```javascript
 function doPost(e) {
   try {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     var data = JSON.parse(e.postData.contents);
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     
-    // Append candidate application row
+    var resumeUrl = "";
+    
+    // If candidate uploaded a file (base64)
+    if (data.fileData && data.fileName) {
+      // Find or create "MoxiWorks Referral Resumes" folder in Google Drive
+      var folderName = "MoxiWorks Referral Resumes";
+      var folders = DriveApp.getFoldersByName(folderName);
+      var folder = folders.hasNext() ? folders.next() : DriveApp.createFolder(folderName);
+      
+      // Decode Base64 and create file in Drive
+      var decoded = Utilities.base64Decode(data.fileData.split(',')[1] || data.fileData);
+      var blob = Utilities.newBlob(decoded, data.fileType || "application/pdf", data.name + " - Resume - " + data.fileName);
+      var file = folder.createFile(blob);
+      
+      // Set permissions to anyone with link can view
+      file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+      resumeUrl = file.getUrl();
+    } else if (data.resumeUrl) {
+      resumeUrl = data.resumeUrl;
+    }
+    
+    // Append row to Google Sheet
     sheet.appendRow([
       new Date(),
       data.role || '',
@@ -57,18 +81,20 @@ function doPost(e) {
       data.phone || '',
       data.experience || '',
       data.linkedin || '',
-      data.resumeUrl || '',
+      resumeUrl,
       data.notes || ''
     ]);
     
-    // Optional: Send instant email notification to your inbox
-    // GmailApp.sendEmail("your-email@example.com", "New MoxiWorks Referral: " + data.name, "Role: " + data.role + "\nLinkedIn: " + data.linkedin + "\nResume: " + data.resumeUrl);
-
-    return ContentService.createTextOutput(JSON.stringify({"status": "success"}))
-      .setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput(JSON.stringify({
+      "status": "success",
+      "resumeUrl": resumeUrl
+    })).setMimeType(ContentService.MimeType.JSON);
+    
   } catch(err) {
-    return ContentService.createTextOutput(JSON.stringify({"status": "error", "message": err.toString()}))
-      .setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput(JSON.stringify({
+      "status": "error",
+      "message": err.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
   }
 }
 ```
@@ -77,17 +103,10 @@ function doPost(e) {
 
 ---
 
-### Step 3: Deploy as Web App
-1. In the top right of Apps Script, click **Deploy** → **New deployment**.
-2. Click the ⚙️ gear icon next to "Select type" and choose **Web app**.
-3. Configure the deployment settings:
-   - **Description**: `Referral Intake Webhook`
-   - **Execute as**: `Me`
-   - **Who has access**: `Anyone` *(Crucial so candidates can submit without logging in)*
-4. Click **Deploy**.
-5. Copy the **Web App URL** (looks like `https://script.google.com/macros/s/.../exec`).
-
----
-
-### Step 4: Plug URL into your Portal
-Paste your Web App URL into `REFERRAL_WEBHOOK_URL` inside `index.html` (or share it here and I will connect and push it to GitHub Pages for you!).
+### Step 3: Deploy Webhook URL
+1. Click **Deploy** → **New deployment** (top right).
+2. Select type: **Web app**.
+3. Set **Execute as**: `Me`.
+4. Set **Who has access**: `Anyone`.
+5. Click **Deploy** and copy the **Web App URL**.
+6. Paste the URL into `REFERRAL_WEBHOOK_URL` in `index.html` (or share it here and I will connect it!).
