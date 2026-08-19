@@ -1174,8 +1174,8 @@ def generate_portal():
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">LinkedIn Profile URL <span class="req">*</span></label>
-                    <input type="url" id="appLinkedin" class="form-input" placeholder="https://linkedin.com/in/yourprofile" required />
+                    <label class="form-label">LinkedIn Profile URL (Optional)</label>
+                    <input type="url" id="appLinkedin" class="form-input" placeholder="https://linkedin.com/in/yourprofile" />
                 </div>
 
                 <div class="form-group">
@@ -1195,12 +1195,6 @@ def generate_portal():
                     </div>
                     <input type="file" id="appResumeFile" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" onchange="handleFileSelected(event)" style="display: none;" />
                     <div id="fileErrorMsg" style="font-size: 0.75rem; color: #e53e3e; font-weight: 600; margin-top: 0.3rem; display: none;"></div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Or Paste Public Resume Link (Optional)</label>
-                    <input type="url" id="appResumeUrl" class="form-input" placeholder="https://drive.google.com/file/d/... or Dropbox link" />
-                    <span class="form-helper">If you have a Google Drive or OneDrive link, you can also paste it here.</span>
                 </div>
 
                 <div class="form-group">
@@ -1402,11 +1396,10 @@ def generate_portal():
         function submitReferralForm(e) {
             e.preventDefault();
             const btn = document.getElementById('btnSubmitApp');
-            const resumeLink = document.getElementById('appResumeUrl').value.trim();
 
-            if (!attachedFile && !resumeLink) {
+            if (!attachedFile) {
                 const errEl = document.getElementById('fileErrorMsg');
-                errEl.innerText = 'Please upload your resume (PDF or Word under 5 MB) or provide a resume link.';
+                errEl.innerText = 'Please upload your resume (PDF or Word document under 5 MB).';
                 errEl.style.display = 'block';
                 return;
             }
@@ -1415,7 +1408,6 @@ def generate_portal():
             btn.innerText = 'Submitting...';
 
             function sendPayload(fileBase64, fileName, fileType) {
-                const resumeDisplay = attachedFile ? `Attached: ${attachedFile.name}` : resumeLink;
                 const payload = {
                     timestamp: new Date().toISOString(),
                     role: document.getElementById('appRoleTitle').value,
@@ -1423,12 +1415,12 @@ def generate_portal():
                     email: document.getElementById('appEmail').value,
                     phone: document.getElementById('appPhone').value,
                     experience: document.getElementById('appExp').value,
-                    linkedin: document.getElementById('appLinkedin').value,
-                    resumeUrl: resumeDisplay,
+                    linkedin: document.getElementById('appLinkedin').value || '',
+                    resumeUrl: `Attached File: ${fileName}`,
                     fileName: fileName || '',
                     fileType: fileType || '',
                     fileData: fileBase64 || '',
-                    notes: document.getElementById('appNotes').value
+                    notes: document.getElementById('appNotes').value || ''
                 };
 
                 if (REFERRAL_WEBHOOK_URL) {
@@ -1447,18 +1439,14 @@ def generate_portal():
                 }
             }
 
-            if (attachedFile) {
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    sendPayload(evt.target.result, attachedFile.name, attachedFile.type);
-                };
-                reader.onerror = function() {
-                    sendPayload('', '', '');
-                };
-                reader.readAsDataURL(attachedFile);
-            } else {
-                sendPayload('', '', '');
-            }
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                sendPayload(evt.target.result, attachedFile.name, attachedFile.type);
+            };
+            reader.onerror = function() {
+                sendPayload('', attachedFile.name, attachedFile.type);
+            };
+            reader.readAsDataURL(attachedFile);
 
             function handleSuccess() {
                 btn.disabled = false;
