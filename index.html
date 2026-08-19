@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoxiWorks | Referral Job Descriptions Portal</title>
+    <link rel="icon" href="https://moxiworks.com/wp-content/uploads/2025/06/cropped-moxiworks-favicon-32x32.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* MoxiWorks Official Brand Design System */
+            --moxi-navy: #0A364B;
+            --moxi-denim: #1F82A5;
+            --moxi-denim-dark: #166580;
+            --moxi-pale-blue: #EFF7FA;
+            --moxi-light-blue-bg: #F4F9FC;
+            --moxi-green: #86F59A;
+            --moxi-green-dark: #1f9450;
+            --moxi-marine: #2976CC;
+            --moxi-azure: #34A9FF;
+            --moxi-frost: #AFD6E6;
+            --moxi-daffodil: #FBD771;
+            --moxi-teal: #2BCCB3;
+            
+            /* UI Surface & Text Colors */
+            --bg-body: #F4F9FC;
+            --surface-white: #FFFFFF;
+            --surface-card: #FFFFFF;
+            --text-primary: #0A364B;
+            --text-secondary: #536E7B;
+            --text-muted: #7E96A2;
+            --border-light: #DFEBF1;
+            --border-hover: #AFD6E6;
+            
+            /* Shadows & Radii */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+            --shadow-subtle: 0 2px 8px rgba(10, 54, 75, 0.05);
+            --shadow-card: 0 4px 16px rgba(10, 54, 75, 0.07);
+            --shadow-hover: 0 8px 24px rgba(10, 54, 75, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Top Header */
+        .site-header {
+            background-color: var(--moxi-navy);
+            color: #FFFFFF;
+            padding: 1.25rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(10, 54, 75, 0.15);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 32px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .brand-badge {
+            background-color: rgba(134, 245, 154, 0.18);
+            color: var(--moxi-green);
+            border: 1px solid rgba(134, 245, 154, 0.35);
+            padding: 0.25rem 0.65rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .header-stats {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+            color: #CFE3EC;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .stat-number {
+            color: var(--moxi-green);
+            font-weight: 700;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(180deg, var(--moxi-navy) 0%, #0E445E 60%, var(--moxi-pale-blue) 100%);
+            padding: 3.5rem 1.5rem 4.5rem;
+            color: #FFFFFF;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-inner {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            padding: 0.4rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-tag span.dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--moxi-green);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px var(--moxi-green);
+        }
+
+        .hero-title {
+            font-size: 2.75rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title span.highlight {
+            color: var(--moxi-green);
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: #D3E7F0;
+            max-width: 680px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: -2.5rem auto 4rem;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Notice Banner */
+        .sso-notice {
+            background-color: var(--surface-white);
+            border-left: 4px solid var(--moxi-denim);
+            border-radius: var(--radius-md);
+            padding: 1.25rem 1.5rem;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            color: var(--text-primary);
+        }
+
+        .notice-icon {
+            font-size: 1.4rem;
+            color: var(--moxi-denim);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .notice-content h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--moxi-navy);
+            margin-bottom: 0.25rem;
+        }
+
+        .notice-content p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Toolbar & Controls */
+        .control-panel {
+            background-color: var(--surface-white);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .search-and-bulk {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .search-box-wrapper {
+            position: relative;
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.6rem;
+            border: 1.5px solid var(--border-light);
+            border-radius: var(--radius-full);
+            font-size: 0.95rem;
+            font-family: inherit;
+            background-color: var(--moxi-light-blue-bg);
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--moxi-denim);
+            background-color: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(31, 130, 165, 0.15);
+        }
+
+        .bulk-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn {
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.875rem;
+            padding: 0.7rem 1.25rem;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background-color: var(--moxi-green);
+            color: var(--moxi-navy);
+            box-shadow: 0 2px 8px rgba(134, 245, 154, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: #72ec87;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(134, 245, 154, 0.55);
+        }
+
+        .btn-navy {
+            background-color: var(--moxi-navy);
+            color: #FFFFFF;
+        }
+
+        .btn-navy:hover {
+            background-color: #124761;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1.5px solid var(--border-light);
+            color: var(--text-primary);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--moxi-denim);
+            color: var(--moxi-denim);
+            background-color: var(--moxi-pale-blue);
+        }
+
+        /* Filter Pills */
+        .filter-tabs {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.25rem;
+        }
+
+        .tab-pill {
+            background-color: var(--moxi-light-blue-bg);
+            border: 1px solid var(--border-light);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.45rem 1rem;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .tab-pill:hover {
+            border-color: var(--moxi-denim);
+            color: var(--moxi-denim);
+        }
+
+        .tab-pill.active {
+            background-color: var(--moxi-navy);
+            color: #FFFFFF;
+            border-color: var(--moxi-navy);
+        }
+
+        .tab-pill .tab-count {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: inherit;
+            padding: 0.1rem 0.45rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+        }
+
+        .tab-pill:not(.active) .tab-count {
+            background-color: #DFEBF1;
+            color: var(--moxi-navy);
+        }
+
+        /* Category Section */
+        .category-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--moxi-navy);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .section-badge {
+            background-color: var(--moxi-pale-blue);
+            color: var(--moxi-denim);
+            border: 1px solid var(--border-light);
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* Jobs Grid */
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 1.25rem;
+        }
+
+        /* Job Card Component */
+        .job-card {
+            background-color: var(--surface-card);
+            border: 1.5px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1.25rem;
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .job-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-top {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .card-tags {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .exp-badge {
+            background-color: rgba(134, 245, 154, 0.2);
+            color: #0b612d;
+            border: 1px solid rgba(134, 245, 154, 0.5);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-full);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .dept-tag {
+            background-color: var(--moxi-pale-blue);
+            color: var(--moxi-denim);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.55rem;
+            border-radius: var(--radius-full);
+        }
+
+        .job-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--moxi-navy);
+            line-height: 1.3;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--moxi-light-blue-bg);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 0.5rem 0.75rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            word-break: break-all;
+        }
+
+        .docx-icon {
+            color: var(--moxi-marine);
+            font-size: 1.1rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        /* Card Actions */
+        .card-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .btn-download {
+            flex: 1;
+            background-color: var(--moxi-navy);
+            color: #FFFFFF;
+            padding: 0.6rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: var(--radius-md);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-download:hover {
+            background-color: var(--moxi-denim);
+            color: #FFFFFF;
+        }
+
+        .btn-icon-action {
+            background-color: var(--moxi-light-blue-bg);
+            border: 1px solid var(--border-light);
+            color: var(--moxi-navy);
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .btn-icon-action:hover {
+            background-color: var(--moxi-pale-blue);
+            border-color: var(--moxi-denim);
+            color: var(--moxi-denim);
+        }
+
+        /* Toast Alert */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--moxi-navy);
+            color: #FFFFFF;
+            padding: 0.85rem 1.4rem;
+            border-radius: var(--radius-full);
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 8px 24px rgba(10, 54, 75, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 4px solid var(--moxi-green);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background-color: var(--surface-white);
+            border-radius: var(--radius-lg);
+            border: 1.5px dashed var(--border-light);
+            display: none;
+        }
+
+        .empty-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--moxi-navy);
+            color: #CFE3EC;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-inner {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            height: 26px;
+            filter: brightness(0) invert(1);
+            opacity: 0.85;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: #9DBBCA;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-stats {
+                display: none;
+            }
+            .search-and-bulk {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .bulk-actions {
+                width: 100%;
+            }
+            .bulk-actions .btn {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="https://moxiworks.com" target="_blank" class="brand-logo">
+                <img src="https://moxiworks.com/wp-content/uploads/2025/06/moxiworks-logo-dark.svg" alt="MoxiWorks Logo" class="logo-img" />
+                <span class="brand-badge">Referral Hub</span>
+            </a>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span>Active Openings:</span>
+                    <span class="stat-number" id="headerCount">19 Roles</span>
+                </div>
+                <div class="stat-item">
+                    <span>Departments:</span>
+                    <span class="stat-number">5 Teams</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-tag">
+                <span class="dot"></span>
+                <span>MoxiWorks Talent & Referral Network</span>
+            </div>
+            <h1 class="hero-title">Open Opportunities & <span class="highlight">Job Descriptions</span></h1>
+            <p class="hero-subtitle">Access and download verified job description documents for all open engineering, product, marketing, finance, and operations roles.</p>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="main-container">
+        <!-- SSO Authentication Notice -->
+        <div class="sso-notice">
+            <div class="notice-icon">🔐</div>
+            <div class="notice-content">
+                <h4>Microsoft 365 Organization Authentication Required</h4>
+                <p>These documents are hosted on the secure MoxiWorks SharePoint repository. When clicking <strong>Download</strong>, ensure you are logged in to your MoxiWorks Microsoft 365 account in this browser. Downloads will initiate directly.</p>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <div class="search-and-bulk">
+                <div class="search-box-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search roles by title, skill (e.g. RoR, React, QA, PM), or experience..." oninput="filterJobs()" />
+                </div>
+                <div class="bulk-actions">
+                    <button class="btn btn-primary" onclick="bulkDownloadVisible()">
+                        <span>⚡</span>
+                        <span>Download Visible (<span id="visibleCountBtn">19</span>)</span>
+                    </button>
+                    <button class="btn btn-outline" onclick="copyAllSharePointLinks()">
+                        <span>📋</span>
+                        <span>Copy All Links</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="tab-pill active" onclick="setCategoryFilter('all', this)">
+                    All Roles <span class="tab-count">19</span>
+                </button>
+                <button class="tab-pill" onclick="setCategoryFilter('engineering', this)">
+                    💻 Engineering <span class="tab-count">10</span>
+                </button>
+                <button class="tab-pill" onclick="setCategoryFilter('product', this)">
+                    🎯 Product <span class="tab-count">2</span>
+                </button>
+                <button class="tab-pill" onclick="setCategoryFilter('support', this)">
+                    🤝 Customer Success <span class="tab-count">3</span>
+                </button>
+                <button class="tab-pill" onclick="setCategoryFilter('marketing', this)">
+                    📈 Marketing <span class="tab-count">3</span>
+                </button>
+                <button class="tab-pill" onclick="setCategoryFilter('finance', this)">
+                    💰 Finance <span class="tab-count">1</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state">
+            <div class="empty-icon">🔎</div>
+            <h3 style="color: var(--moxi-navy); margin-bottom: 0.5rem;">No matching job descriptions found</h3>
+            <p style="color: var(--text-secondary);">Try clearing your search query or switching category tabs.</p>
+        </div>
+
+        <!-- Category: Engineering & Technology -->
+        <section class="category-section" data-cat-section="engineering">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span>💻</span> Engineering & Technology
+                </h2>
+                <span class="section-badge">10 Positions</span>
+            </div>
+            <div class="jobs-grid">
+                <!-- 1. Director of Engineering -->
+                <article class="job-card" data-category="engineering" data-title="Director of Engineering" data-exp="10+ Years" data-file="Director of Engineering - India JD - July 2026.docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Engineering</span>
+                            <span class="exp-badge">⭐ 10+ Years</span>
+                        </div>
+                        <h3 class="job-title">Director of Engineering</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>Director of Engineering - India JD - July 2026.docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCvJeMzkRy3QJdX4bzr1KS9AWyvsdGUTXcD6Y-Ql6AKA7U?e=CvZps2&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCvJeMzkRy3QJdX4bzr1KS9AWyvsdGUTXcD6Y-Ql6AKA7U?e=CvZps2')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCvJeMzkRy3QJdX4bzr1KS9AWyvsdGUTXcD6Y-Ql6AKA7U?e=CvZps2" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+
+                <!-- 2. Software Engineer (RoR) -->
+                <article class="job-card" data-category="engineering" data-title="Software Engineer (RoR) Ruby on Rails" data-exp="3-5 Years" data-file="ROR Developer.docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Engineering</span>
+                            <span class="exp-badge">⭐ 3-5 Years</span>
+                        </div>
+                        <h3 class="job-title">Software Engineer (RoR)</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>ROR Developer.docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQB7qMRk7yxVQoSce_k5rUdLASOlP1VwObrOgQ-LtOowFG4?e=gfqJvx&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQB7qMRk7yxVQoSce_k5rUdLASOlP1VwObrOgQ-LtOowFG4?e=gfqJvx')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQB7qMRk7yxVQoSce_k5rUdLASOlP1VwObrOgQ-LtOowFG4?e=gfqJvx" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+
+                <!-- 3. Senior Software Engineer (RoR) -->
+                <article class="job-card" data-category="engineering" data-title="Senior Software Engineer (RoR) Ruby on Rails" data-exp="5-7 Years" data-file="Senior ROR.docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Engineering</span>
+                            <span class="exp-badge">⭐ 5-7 Years</span>
+                        </div>
+                        <h3 class="job-title">Senior Software Engineer (RoR)</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>Senior ROR.docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQB5_BtZBAx4Qr6RVvK6LpSIAY4NuWRACv0sJYJ7pkuDDtw?e=xHghmb&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQB5_BtZBAx4Qr6RVvK6LpSIAY4NuWRACv0sJYJ7pkuDDtw?e=xHghmb')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQB5_BtZBAx4Qr6RVvK6LpSIAY4NuWRACv0sJYJ7pkuDDtw" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+
+                <!-- 4. Engineering Manager (RoR) -->
+                <article class="job-card" data-category="engineering" data-title="Engineering Manager (RoR) Pune Rise" data-exp="10+ Years" data-file="Rise Engineering Manager - Pune (1).docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Engineering</span>
+                            <span class="exp-badge">⭐ 10+ Years</span>
+                        </div>
+                        <h3 class="job-title">Engineering Manager (RoR)</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>Rise Engineering Manager - Pune (1).docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCnoAMSoysDTJixDMj-1t91AX32uL58DnOxAWPG9S0I5lk?e=dr7S3I&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCnoAMSoysDTJixDMj-1t91AX32uL58DnOxAWPG9S0I5lk?e=dr7S3I')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCnoAMSoysDTJixDMj-1t91AX32uL58DnOxAWPG9S0I5lk?e=dr7S3I" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+
+                <!-- 5. React Developer -->
+                <article class="job-card" data-category="engineering" data-title="React Developer React Native Frontend" data-exp="3-5 Years" data-file="React Native_JD.docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Engineering</span>
+                            <span class="exp-badge">⭐ 3-5 Years</span>
+                        </div>
+                        <h3 class="job-title">React Developer</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>React Native_JD.docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQAKp_5OT0-7T6r1KTwsxz5fAaXY3NtrKYBKJHZKWAgAFlQ?e=Gy2WRq&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQAKp_5OT0-7T6r1KTwsxz5fAaXY3NtrKYBKJHZKWAgAFlQ?e=Gy2WRq')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQAKp_5OT0-7T6r1KTwsxz5fAaXY3NtrKYBKJHZKWAgAFlQ?e=Gy2WRq" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+
+                <!-- 6. Senior React Developer -->
+                <article class="job-card" data-category="engineering" data-title="Senior React Developer React Native Frontend" data-exp="7+ Years" data-file="React Native_JD.docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Engineering</span>
+                            <span class="exp-badge">⭐ 7+ Years</span>
+                        </div>
+                        <h3 class="job-title">Senior React Developer</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>React Native_JD.docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQAKp_5OT0-7T6r1KTwsxz5fAaXY3NtrKYBKJHZKWAgAFlQ?e=Gy2WRq&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQAKp_5OT0-7T6r1KTwsxz5fAaXY3NtrKYBKJHZKWAgAFlQ?e=Gy2WRq')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQAKp_5OT0-7T6r1KTwsxz5fAaXY3NtrKYBKJHZKWAgAFlQ?e=Gy2WRq" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+
+                <!-- 7. Software Engineer - PHP / WordPress -->
+                <article class="job-card" data-category="engineering" data-title="Software Engineer PHP WordPress" data-exp="3-6 Years" data-file="PHP_WordPress_Engineer_3-6y.docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Engineering</span>
+                            <span class="exp-badge">⭐ 3-6 Years</span>
+                        </div>
+                        <h3 class="job-title">Software Engineer - PHP / WordPress</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>PHP_WordPress_Engineer_3-6y.docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQBGJWNVySfTQquBvB9S_ZTZAdLasjwSjhoweWoPvfz9zo0?e=mrQagi&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQBGJWNVySfTQquBvB9S_ZTZAdLasjwSjhoweWoPvfz9zo0?e=mrQagi')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQBGJWNVySfTQquBvB9S_ZTZAdLasjwSjhoweWoPvfz9zo0" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+
+                <!-- 8. Lead Engineer - PHP / WordPress -->
+                <article class="job-card" data-category="engineering" data-title="Lead Engineer PHP WordPress" data-exp="8+ Years" data-file="PHP_WordPress_Lead_8y+ (1).docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Engineering</span>
+                            <span class="exp-badge">⭐ 8+ Years</span>
+                        </div>
+                        <h3 class="job-title">Lead Engineer - PHP / WordPress</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>PHP_WordPress_Lead_8y+ (1).docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCgSAomqZYLTawGl3FDUq7YAQ_k0FOhXdxFQeo4tN0jEe0?e=pzGojQ&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCgSAomqZYLTawGl3FDUq7YAQ_k0FOhXdxFQeo4tN0jEe0?e=pzGojQ')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCgSAomqZYLTawGl3FDUq7YAQ_k0FOhXdxFQeo4tN0jEe0" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+
+                <!-- 9. QA Automation -->
+                <article class="job-card" data-category="engineering" data-title="QA Automation Cypress Testing Quality Engineer" data-exp="3-5 Years" data-file="QA(Cypress)_JD.docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Engineering</span>
+                            <span class="exp-badge">⭐ 3-5 Years</span>
+                        </div>
+                        <h3 class="job-title">QA Automation (Cypress)</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>QA(Cypress)_JD.docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCp5KKr2eMHT6voluzJNnRKAd9qJUXk333YNzwL9WdSk-U?e=Hks9bp&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCp5KKr2eMHT6voluzJNnRKAd9qJUXk333YNzwL9WdSk-U?e=Hks9bp')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCp5KKr2eMHT6voluzJNnRKAd9qJUXk333YNzwL9WdSk-U" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+
+                <!-- 10. AP Support Engineer -->
+                <article class="job-card" data-category="engineering" data-title="AP Support Engineer Technical Support Ruby RoR" data-exp="3+ Years" data-file="ROR Developer.docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Engineering</span>
+                            <span class="exp-badge">⭐ 3+ Years</span>
+                        </div>
+                        <h3 class="job-title">AP Support Engineer</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>ROR Developer.docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQB7qMRk7yxVQoSce_k5rUdLASOlP1VwObrOgQ-LtOowFG4?e=DNZzwp&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQB7qMRk7yxVQoSce_k5rUdLASOlP1VwObrOgQ-LtOowFG4?e=DNZzwp')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQB7qMRk7yxVQoSce_k5rUdLASOlP1VwObrOgQ-LtOowFG4?e=DNZzwp" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Category: Product Management & Design -->
+        <section class="category-section" data-cat-section="product">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span>🎯</span> Product Management & Design
+                </h2>
+                <span class="section-badge">3 Positions</span>
+            </div>
+            <div class="jobs-grid">
+                <!-- 11. Senior Product Manager -->
+                <article class="job-card" data-category="product" data-title="Senior Product Manager SPM Websites Pune" data-exp="7+ Years" data-file="Senior_PM_Websites_Pune_JD_1008.docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Product</span>
+                            <span class="exp-badge">⭐ 7+ Years</span>
+                        </div>
+                        <h3 class="job-title">Senior Product Manager</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>Senior_PM_Websites_Pune_JD_1008.docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQA5xX2tmWHZTIDuGXGxD7QPAWtOVqnif1la3KqAPc2RS68?e=3f3SsV&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQA5xX2tmWHZTIDuGXGxD7QPAWtOVqnif1la3KqAPc2RS68?e=3f3SsV')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQA5xX2tmWHZTIDuGXGxD7QPAWtOVqnif1la3KqAPc2RS68" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+
+                <!-- 12. UX Designer / Senior Product Designer -->
+                <article class="job-card" data-category="product" data-title="UX Designer Senior Product Designer UI/UX Pune" data-exp="6+ Years" data-file="Senior Product Designer - Pune.docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Design / Product</span>
+                            <span class="exp-badge">⭐ 6+ Years</span>
+                        </div>
+                        <h3 class="job-title">UX Designer (Sr. Product Designer)</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>Senior Product Designer - Pune.docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQC3SC-_zGbiRo21CsyvLinpAdqGPJ3yVDPBysisSmENmDA?e=Ee8wUD&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQC3SC-_zGbiRo21CsyvLinpAdqGPJ3yVDPBysisSmENmDA?e=Ee8wUD')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQC3SC-_zGbiRo21CsyvLinpAdqGPJ3yVDPBysisSmENmDA" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+
+                <!-- 13. Technical Program Manager -->
+                <article class="job-card" data-category="product" data-title="Technical Program Manager TPM Pune" data-exp="6+ Years" data-file="Technical Program Manager - Pune.docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Program Management</span>
+                            <span class="exp-badge">⭐ 6+ Years</span>
+                        </div>
+                        <h3 class="job-title">Technical Program Manager</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>Technical Program Manager - Pune.docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQBwacQUQoRKTbOMbMX0NsBUAfnBxgB_H2eb4VL9nkar8jw?e=dqL952&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQBwacQUQoRKTbOMbMX0NsBUAfnBxgB_H2eb4VL9nkar8jw?e=dqL952')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQBwacQUQoRKTbOMbMX0NsBUAfnBxgB_H2eb4VL9nkar8jw" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Category: Customer Success & Support -->
+        <section class="category-section" data-cat-section="support">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span>🤝</span> Customer Success & Support
+                </h2>
+                <span class="section-badge">3 Positions</span>
+            </div>
+            <div class="jobs-grid">
+                <!-- 14. Customer Support Engineer -->
+                <article class="job-card" data-category="support" data-title="Customer Support Engineer CSE" data-exp="2-4 Years" data-file="Customer_Support_Engineer_Job_Description.docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Customer Support</span>
+                            <span class="exp-badge">⭐ 2-4 Years</span>
+                        </div>
+                        <h3 class="job-title">Customer Support Engineer</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>Customer_Support_Engineer_Job_Description.docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQBFXF96nqAyQYvUykVLo0OtATOZlxRBmkP_vdDqws7UoRA?e=HhZQR9&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQBFXF96nqAyQYvUykVLo0OtATOZlxRBmkP_vdDqws7UoRA?e=HhZQR9')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQBFXF96nqAyQYvUykVLo0OtATOZlxRBmkP_vdDqws7UoRA" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+
+                <!-- 15. Onboarding QA -->
+                <article class="job-card" data-category="support" data-title="Onboarding QA Specialist Quality" data-exp="2+ Years" data-file="Onboarding QA Specialist (1).docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Onboarding</span>
+                            <span class="exp-badge">⭐ 2+ Years</span>
+                        </div>
+                        <h3 class="job-title">Onboarding QA Specialist</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>Onboarding QA Specialist (1).docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCxrzfpBr2_Tro7E9GWO55bAaZF3pVWs9AvgC9Emo1pjQs?e=cVHrka&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCxrzfpBr2_Tro7E9GWO55bAaZF3pVWs9AvgC9Emo1pjQs?e=cVHrka')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCxrzfpBr2_Tro7E9GWO55bAaZF3pVWs9AvgC9Emo1pjQs" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+
+                <!-- 16. Implementation Specialist -->
+                <article class="job-card" data-category="support" data-title="Implementation Specialist Customer Onboarding" data-exp="2+ Years" data-file="Implementation Specialist (1).docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Implementation</span>
+                            <span class="exp-badge">⭐ 2+ Years</span>
+                        </div>
+                        <h3 class="job-title">Implementation Specialist</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>Implementation Specialist (1).docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQAs2tJNVbreQJoitabO0J_QAVzISV3h5m0frkPgyQWXDEk?e=JvS05W&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQAs2tJNVbreQJoitabO0J_QAVzISV3h5m0frkPgyQWXDEk?e=JvS05W')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQAs2tJNVbreQJoitabO0J_QAVzISV3h5m0frkPgyQWXDEk" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Category: Marketing -->
+        <section class="category-section" data-cat-section="marketing">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span>📈</span> Marketing & Growth
+                </h2>
+                <span class="section-badge">3 Positions</span>
+            </div>
+            <div class="jobs-grid">
+                <!-- 17. Digital Marketing Specialist -->
+                <article class="job-card" data-category="marketing" data-title="Digital Marketing Specialist Growth SEO SEM" data-exp="1-3 Years" data-file="Digital Marketing Specialist.docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Marketing</span>
+                            <span class="exp-badge">⭐ 1-3 Years</span>
+                        </div>
+                        <h3 class="job-title">Digital Marketing Specialist</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>Digital Marketing Specialist.docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQA4wtBHwDvcQab8OTX-hgu9ATgrwaRuj2mQn0OdGeNCLqQ?e=Yn4zR6&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQA4wtBHwDvcQab8OTX-hgu9ATgrwaRuj2mQn0OdGeNCLqQ?e=Yn4zR6')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQA4wtBHwDvcQab8OTX-hgu9ATgrwaRuj2mQn0OdGeNCLqQ" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+
+                <!-- 18. Marketing Operations Specialist -->
+                <article class="job-card" data-category="marketing" data-title="Marketing Operations Specialist MOPs Automation" data-exp="5+ Years" data-file="Marketing Operations Specialist.docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Marketing Ops</span>
+                            <span class="exp-badge">⭐ 5+ Years</span>
+                        </div>
+                        <h3 class="job-title">Marketing Operations Specialist</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>Marketing Operations Specialist.docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQAmByrgXuhNTKglIjDUyoLSAXggFv7eUD67ShwKN2HAUZc?e=5acKEf&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQAmByrgXuhNTKglIjDUyoLSAXggFv7eUD67ShwKN2HAUZc?e=5acKEf')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQAmByrgXuhNTKglIjDUyoLSAXggFv7eUD67ShwKN2HAUZc" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+
+                <!-- 19. Revenue Operations Analyst -->
+                <article class="job-card" data-category="marketing" data-title="Revenue Operations Reporting Analyst RevOps" data-exp="4-8 Years" data-file="Revenue Operations Reporting Analyst.docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">RevOps</span>
+                            <span class="exp-badge">⭐ 4-8 Years</span>
+                        </div>
+                        <h3 class="job-title">Revenue Operations Analyst</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>Revenue Operations Reporting Analyst.docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQAE86mo354vRqqBUj4Tw1lDASCKf6T0RoUMgUkrJeXRYPw?e=kjvAEe&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQAE86mo354vRqqBUj4Tw1lDASCKf6T0RoUMgUkrJeXRYPw?e=kjvAEe')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQAE86mo354vRqqBUj4Tw1lDASCKf6T0RoUMgUkrJeXRYPw" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Category: Finance -->
+        <section class="category-section" data-cat-section="finance">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span>💰</span> Finance & Accounting
+                </h2>
+                <span class="section-badge">1 Position</span>
+            </div>
+            <div class="jobs-grid">
+                <!-- 20. Senior Accountant -->
+                <article class="job-card" data-category="finance" data-title="Senior Accountant MW India Finance Accounting" data-exp="5+ Years" data-file="Senior Accountant - MW India.docx">
+                    <div class="card-top">
+                        <div class="card-tags">
+                            <span class="dept-tag">Finance</span>
+                            <span class="exp-badge">⭐ 5+ Years</span>
+                        </div>
+                        <h3 class="job-title">Senior Accountant (India)</h3>
+                        <div class="file-info">
+                            <span class="docx-icon">📄</span>
+                            <span>Senior Accountant - MW India.docx</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCNBJnI79ADR4607m7yK0PWAZDhFJtQHdoLxiY_GKKwmzw?e=gSkCqm&download=1" target="_blank" class="btn-download jd-link">
+                            <span>⬇️</span> Download .docx
+                        </a>
+                        <button class="btn-icon-action" title="Copy Link" onclick="copySingleLink('https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCNBJnI79ADR4607m7yK0PWAZDhFJtQHdoLxiY_GKKwmzw?e=gSkCqm')">🔗</button>
+                        <a href="https://moxiworks.sharepoint.com/:w:/s/MoxiWorks/IQCNBJnI79ADR4607m7yK0PWAZDhFJtQHdoLxiY_GKKwmzw" target="_blank" class="btn-icon-action" title="View in SharePoint">👁️</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span id="toastIcon">📋</span>
+        <span id="toastMessage">Link copied to clipboard!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <img src="https://moxiworks.com/wp-content/uploads/2025/06/moxiworks-logo-dark.svg" alt="MoxiWorks" class="footer-logo" />
+            <p class="footer-text">© 2026 MoxiWorks. Internal Referral & Talent Acquisition Portal. Styled according to MoxiWorks Brand Guidelines.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        let currentCategory = 'all';
+
+        function showToast(message, icon = '📋') {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+            toastMsg.innerText = message;
+            toastIcon.innerText = icon;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function copySingleLink(url) {
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('SharePoint link copied to clipboard!', '✅');
+            }).catch(() => {
+                prompt('Copy this link:', url);
+            });
+        }
+
+        function copyAllSharePointLinks() {
+            const links = Array.from(document.querySelectorAll('.jd-link')).map(a => a.href.replace('&download=1', ''));
+            const text = links.join('\n');
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(`Copied ${links.length} SharePoint links to clipboard!`, '🚀');
+            }).catch(() => {
+                prompt('Copy links:', text);
+            });
+        }
+
+        function setCategoryFilter(cat, pillElem) {
+            currentCategory = cat;
+            document.querySelectorAll('.tab-pill').forEach(el => el.classList.remove('active'));
+            pillElem.classList.add('active');
+            filterJobs();
+        }
+
+        function filterJobs() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.job-card');
+            const sections = document.querySelectorAll('.category-section');
+            let visibleTotal = 0;
+
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                const exp = card.getAttribute('data-exp').toLowerCase();
+                const file = card.getAttribute('data-file').toLowerCase();
+                const category = card.getAttribute('data-category');
+
+                const matchesSearch = query === '' || title.includes(query) || exp.includes(query) || file.includes(query);
+                const matchesCategory = currentCategory === 'all' || category === currentCategory;
+
+                if (matchesSearch && matchesCategory) {
+                    card.style.display = 'flex';
+                    visibleTotal++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Handle section headers visibility
+            sections.forEach(sec => {
+                const visibleInSec = sec.querySelectorAll('.job-card[style*="display: flex"]').length;
+                sec.style.display = visibleInSec > 0 ? 'block' : 'none';
+            });
+
+            // Update counter
+            document.getElementById('visibleCountBtn').innerText = visibleTotal;
+            const emptyState = document.getElementById('emptyState');
+            emptyState.style.display = visibleTotal === 0 ? 'block' : 'none';
+        }
+
+        function bulkDownloadVisible() {
+            const visibleLinks = Array.from(document.querySelectorAll('.job-card[style*="display: flex"] .jd-link'));
+            const targetLinks = visibleLinks.length > 0 ? visibleLinks : Array.from(document.querySelectorAll('.jd-link'));
+            
+            showToast(`Opening download tabs for ${targetLinks.length} roles...`, '⬇️');
+            
+            let delay = 0;
+            targetLinks.forEach((link, idx) => {
+                setTimeout(() => {
+                    window.open(link.href, '_blank');
+                }, delay);
+                delay += 350; // stagger opening to avoid pop-up blockage
+            });
+        }
+    </script>
+</body>
+</html>
