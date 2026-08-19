@@ -1799,33 +1799,50 @@
             btn.disabled = true;
             btn.innerText = 'Submitting...';
 
-            const resumeDisplay = attachedFile ? `Attached file: ${attachedFile.name} (${(attachedFile.size / 1024).toFixed(1)} KB)` : resumeLink;
+            function sendPayload(fileBase64, fileName, fileType) {
+                const resumeDisplay = attachedFile ? `Attached: ${attachedFile.name}` : resumeLink;
+                const payload = {
+                    timestamp: new Date().toISOString(),
+                    role: document.getElementById('appRoleTitle').value,
+                    name: document.getElementById('appName').value,
+                    email: document.getElementById('appEmail').value,
+                    phone: document.getElementById('appPhone').value,
+                    experience: document.getElementById('appExp').value,
+                    linkedin: document.getElementById('appLinkedin').value,
+                    resumeUrl: resumeDisplay,
+                    fileName: fileName || '',
+                    fileType: fileType || '',
+                    fileData: fileBase64 || '',
+                    notes: document.getElementById('appNotes').value
+                };
 
-            const payload = {
-                timestamp: new Date().toISOString(),
-                role: document.getElementById('appRoleTitle').value,
-                name: document.getElementById('appName').value,
-                email: document.getElementById('appEmail').value,
-                phone: document.getElementById('appPhone').value,
-                experience: document.getElementById('appExp').value,
-                linkedin: document.getElementById('appLinkedin').value,
-                resumeUrl: resumeDisplay,
-                notes: document.getElementById('appNotes').value
-            };
+                if (REFERRAL_WEBHOOK_URL) {
+                    fetch(REFERRAL_WEBHOOK_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    }).then(() => {
+                        handleSuccess();
+                    }).catch(() => {
+                        handleSuccess();
+                    });
+                } else {
+                    handleSuccess();
+                }
+            }
 
-            if (REFERRAL_WEBHOOK_URL) {
-                fetch(REFERRAL_WEBHOOK_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                }).then(() => {
-                    handleSuccess();
-                }).catch(() => {
-                    handleSuccess();
-                });
+            if (attachedFile) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    sendPayload(evt.target.result, attachedFile.name, attachedFile.type);
+                };
+                reader.onerror = function() {
+                    sendPayload('', '', '');
+                };
+                reader.readAsDataURL(attachedFile);
             } else {
-                handleSuccess();
+                sendPayload('', '', '');
             }
 
             function handleSuccess() {
