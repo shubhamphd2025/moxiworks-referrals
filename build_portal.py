@@ -1237,8 +1237,8 @@ def generate_portal():
         let selectedFileName = '';
         let selectedFileType = '';
 
-        // Webhook URL: Paste your Google Apps Script Webhook URL here!
-        const REFERRAL_WEBHOOK_URL = '';
+        // Shubham's Google Apps Script Webhook URL
+        const REFERRAL_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbz3KxG5zPaptDjl3iD5Wm7EvJnvh_Uo-w2jLlcWHfM1p6qKlqgR6kepLliEk8bVJKbi/exec';
 
         function showToast(msg, icon = '📋') {
             const t = document.getElementById('toast');
