@@ -1180,9 +1180,30 @@ def generate_portal():
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Resume / CV Link (Google Drive / Dropbox / Cloud Link) <span class="req">*</span></label>
-                    <input type="url" id="appResumeUrl" class="form-input" placeholder="https://drive.google.com/file/d/... (Make sure link is viewable)" required />
-                    <span class="form-helper">Please provide a publicly viewable link to your PDF resume (e.g. Google Drive, Dropbox, or OneDrive).</span>
+                    <label class="form-label">Upload Resume (.pdf, .docx, .doc - max 5 MB) <span class="req">*</span></label>
+                    <div id="dropZone" style="border: 2px dashed var(--border-color); background-color: var(--moxi-light-bg); border-radius: var(--radius-md); padding: 1.25rem 1rem; text-align: center; cursor: pointer; transition: all 0.2s ease;" onclick="document.getElementById('appResumeFile').click()">
+                        <div id="uploadPrompt">
+                            <span style="font-size: 1.75rem; display: block; margin-bottom: 0.35rem;">📄</span>
+                            <span style="font-size: 0.9rem; font-weight: 700; color: var(--moxi-navy);">Click to upload your resume</span>
+                            <span style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Supported formats: PDF, DOCX, DOC (Max file size: 5 MB)</span>
+                        </div>
+                        <div id="fileSelectedBadge" style="display: none; align-items: center; justify-content: center; gap: 0.75rem;">
+                            <span style="font-size: 1.4rem;">📎</span>
+                            <div style="text-align: left;">
+                                <div id="displayFileName" style="font-weight: 700; color: var(--moxi-navy); font-size: 0.9rem;">resume.pdf</div>
+                                <div id="displayFileSize" style="font-size: 0.75rem; color: #167a3f; font-weight: 600;">1.2 MB</div>
+                            </div>
+                            <button type="button" onclick="event.stopPropagation(); removeSelectedFile();" style="background: rgba(229, 62, 62, 0.1); border: 1px solid rgba(229, 62, 62, 0.3); color: #e53e3e; border-radius: var(--radius-sm); padding: 0.2rem 0.5rem; font-size: 0.75rem; cursor: pointer; font-weight: 700;">Remove</button>
+                        </div>
+                    </div>
+                    <input type="file" id="appResumeFile" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" onchange="handleFileSelected(event)" style="display: none;" />
+                    <div id="fileErrorMsg" style="font-size: 0.75rem; color: #e53e3e; font-weight: 600; margin-top: 0.3rem; display: none;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Or Paste Public Resume Link (Optional)</label>
+                    <input type="url" id="appResumeUrl" class="form-input" placeholder="https://drive.google.com/file/d/... or Dropbox link" />
+                    <span class="form-helper">If you have a Google Drive or OneDrive link, you can also paste it here.</span>
                 </div>
 
                 <div class="form-group">
@@ -1227,9 +1248,7 @@ def generate_portal():
         const rolesData = ''' + json.dumps(client_roles) + ''';
         let currentCat = 'all';
         let activeRole = null;
-        let selectedFileBase64 = '';
-        let selectedFileName = '';
-        let selectedFileType = '';
+        let attachedFile = null;
 
         // Shubham's Live Google Apps Script Webhook URL
         const REFERRAL_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxjew8Mt4J4pZITZ8OzZFYeKMHBkWr_oYnFVVhUj-1kk35iyofMFB7A-sKfNDrqO1uY/exec';
@@ -1333,18 +1352,74 @@ def generate_portal():
             });
         }
 
+        function handleFileSelected(e) {
+            const file = e.target.files[0];
+            const errEl = document.getElementById('fileErrorMsg');
+            const dropZone = document.getElementById('dropZone');
+            errEl.style.display = 'none';
+
+            if (!file) {
+                removeSelectedFile();
+                return;
+            }
+
+            // Allowed extensions: pdf, doc, docx
+            const validExtensions = ['.pdf', '.doc', '.docx'];
+            const fileNameLower = file.name.toLowerCase();
+            const isValidExt = validExtensions.some(ext => fileNameLower.endsWith(ext));
+
+            if (!isValidExt) {
+                errEl.innerText = 'Invalid file type. Please upload a PDF (.pdf) or Word document (.docx, .doc).';
+                errEl.style.display = 'block';
+                removeSelectedFile();
+                return;
+            }
+
+            // Max file size: 5MB (5,242,880 bytes)
+            const MAX_SIZE_BYTES = 5 * 1024 * 1024;
+            if (file.size > MAX_SIZE_BYTES) {
+                errEl.innerText = `File is too large (${(file.size / (1024 * 1024)).toFixed(1)} MB). Maximum allowed size is 5 MB.`;
+                errEl.style.display = 'block';
+                removeSelectedFile();
+                return;
+            }
+
+            attachedFile = file;
+            document.getElementById('uploadPrompt').style.display = 'none';
+            const badge = document.getElementById('fileSelectedBadge');
+            badge.style.display = 'flex';
+            document.getElementById('displayFileName').innerText = file.name;
+            document.getElementById('displayFileSize').innerText = `✓ ${(file.size / 1024).toFixed(1)} KB (Ready to submit)`;
+            dropZone.style.borderColor = '#167a3f';
+            dropZone.style.backgroundColor = '#F0FFF4';
+        }
+
+        function removeSelectedFile() {
+            attachedFile = null;
+            document.getElementById('appResumeFile').value = '';
+            document.getElementById('uploadPrompt').style.display = 'block';
+            document.getElementById('fileSelectedBadge').style.display = 'none';
+            const dropZone = document.getElementById('dropZone');
+            dropZone.style.borderColor = 'var(--border-color)';
+            dropZone.style.backgroundColor = 'var(--moxi-light-bg)';
+        }
+
         function submitReferralForm(e) {
             e.preventDefault();
             const btn = document.getElementById('btnSubmitApp');
             const resumeLink = document.getElementById('appResumeUrl').value.trim();
 
-            if (!resumeLink) {
-                alert('Please provide a link to your resume (Google Drive, Dropbox, or OneDrive).');
+            if (!attachedFile && !resumeLink) {
+                const errEl = document.getElementById('fileErrorMsg');
+                errEl.innerText = 'Please upload your resume (PDF or Word under 5 MB) or provide a resume link.';
+                errEl.style.display = 'block';
                 return;
             }
 
             btn.disabled = true;
             btn.innerText = 'Submitting...';
+
+            const resumeDisplay = attachedFile ? `Attached file: ${attachedFile.name} (${(attachedFile.size / 1024).toFixed(1)} KB)` : resumeLink;
 
             const payload = {
                 timestamp: new Date().toISOString(),
@@ -1354,7 +1429,7 @@ def generate_portal():
                 phone: document.getElementById('appPhone').value,
                 experience: document.getElementById('appExp').value,
                 linkedin: document.getElementById('appLinkedin').value,
-                resumeUrl: resumeLink,
+                resumeUrl: resumeDisplay,
                 notes: document.getElementById('appNotes').value
             };
 
@@ -1370,27 +1445,6 @@ def generate_portal():
                     handleSuccess();
                 });
             } else {
-                // Fallback email draft trigger
-                const subject = encodeURIComponent(`[MoxiWorks Referral Application] ${payload.name} - ${payload.role}`);
-                const body = encodeURIComponent(
-                    `Hi Shubham,\n\nI would like to apply for the referral for ${payload.role}.\n\n` +
-                    `Candidate Details:\n` +
-                    `- Name: ${payload.name}\n` +
-                    `- Email: ${payload.email}\n` +
-                    `- Phone: ${payload.phone}\n` +
-                    `- Experience: ${payload.experience}\n` +
-                    `- LinkedIn Profile: ${payload.linkedin}\n` +
-                    `- Resume Link: ${payload.resumeUrl}\n\n` +
-                    `Notes: ${payload.notes}\n\nThank you!`
-                );
-                
-                try {
-                    const saved = JSON.parse(localStorage.getItem('moxiworks_referrals') || '[]');
-                    saved.push(payload);
-                    localStorage.setItem('moxiworks_referrals', JSON.stringify(saved));
-                } catch(err) {}
-
-                window.location.href = `mailto:?subject=${subject}&body=${body}`;
                 handleSuccess();
             }
 
@@ -1399,6 +1453,7 @@ def generate_portal():
                 btn.innerText = '🚀 Submit Application';
                 closeAppModal();
                 document.getElementById('referralForm').reset();
+                removeSelectedFile();
                 showToast('Referral Application submitted successfully! 🎉', '✅');
             }
         }
