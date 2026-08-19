@@ -1530,15 +1530,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Upload Resume File (.pdf, .docx, .doc) <span class="req">*</span></label>
-                    <input type="file" id="appResumeFile" class="form-input" accept=".pdf,.doc,.docx" onchange="handleFileSelect(event)" style="padding: 0.55rem 0.75rem; background-color: #FFFFFF;" />
-                    <div id="fileUploadStatus" style="font-size: 0.75rem; color: #167a3f; font-weight: 600; margin-top: 0.2rem; display: none;">✓ File attached</div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Or Paste Resume Link (Google Drive / Dropbox / Cloud link)</label>
-                    <input type="url" id="appResumeUrl" class="form-input" placeholder="https://drive.google.com/file/d/..." />
-                    <span class="form-helper">Either attach your resume file above OR paste a public Google Drive/cloud link.</span>
+                    <label class="form-label">Resume / CV Link (Google Drive / Dropbox / Cloud Link) <span class="req">*</span></label>
+                    <input type="url" id="appResumeUrl" class="form-input" placeholder="https://drive.google.com/file/d/... (Make sure link is viewable)" required />
+                    <span class="form-helper">Please provide a publicly viewable link to your PDF resume (e.g. Google Drive, Dropbox, or OneDrive).</span>
                 </div>
 
                 <div class="form-group">
@@ -1689,34 +1683,13 @@
             });
         }
 
-        function handleFileSelect(e) {
-            const file = e.target.files[0];
-            const status = document.getElementById('fileUploadStatus');
-            if (file) {
-                selectedFileName = file.name;
-                selectedFileType = file.type || 'application/pdf';
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    selectedFileBase64 = evt.target.result;
-                    status.style.display = 'block';
-                    status.innerText = `✓ Attached: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
-                };
-                reader.readAsDataURL(file);
-            } else {
-                selectedFileBase64 = '';
-                selectedFileName = '';
-                selectedFileType = '';
-                status.style.display = 'none';
-            }
-        }
-
         function submitReferralForm(e) {
             e.preventDefault();
             const btn = document.getElementById('btnSubmitApp');
-
             const resumeLink = document.getElementById('appResumeUrl').value.trim();
-            if (!selectedFileBase64 && !resumeLink) {
-                alert('Please either attach your resume file or provide a cloud resume link.');
+
+            if (!resumeLink) {
+                alert('Please provide a link to your resume (Google Drive, Dropbox, or OneDrive).');
                 return;
             }
 
@@ -1732,9 +1705,6 @@
                 experience: document.getElementById('appExp').value,
                 linkedin: document.getElementById('appLinkedin').value,
                 resumeUrl: resumeLink,
-                fileName: selectedFileName,
-                fileType: selectedFileType,
-                fileData: selectedFileBase64,
                 notes: document.getElementById('appNotes').value
             };
 
@@ -1770,7 +1740,7 @@ I would like to apply for the referral for ${payload.role}.
 ` +
                     `- LinkedIn Profile: ${payload.linkedin}
 ` +
-                    `- Resume Link: ${payload.resumeUrl || '(File attached)'}
+                    `- Resume Link: ${payload.resumeUrl}
 
 ` +
                     `Notes: ${payload.notes}
@@ -1780,7 +1750,7 @@ Thank you!`
                 
                 try {
                     const saved = JSON.parse(localStorage.getItem('moxiworks_referrals') || '[]');
-                    saved.push({ ...payload, fileData: '' }); // save without large base64
+                    saved.push(payload);
                     localStorage.setItem('moxiworks_referrals', JSON.stringify(saved));
                 } catch(err) {}
 
@@ -1793,10 +1763,6 @@ Thank you!`
                 btn.innerText = '🚀 Submit Application';
                 closeAppModal();
                 document.getElementById('referralForm').reset();
-                document.getElementById('fileUploadStatus').style.display = 'none';
-                selectedFileBase64 = '';
-                selectedFileName = '';
-                selectedFileType = '';
                 showToast('Referral Application submitted successfully! 🎉', '✅');
             }
         }
