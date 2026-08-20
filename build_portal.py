@@ -1416,8 +1416,9 @@ def generate_portal():
                     phone: document.getElementById('appPhone').value,
                     experience: document.getElementById('appExp').value,
                     linkedin: document.getElementById('appLinkedin').value || '',
-                    fileName: fileName || attachedFile.name,
-                    fileType: fileType || attachedFile.type,
+                    resumeUrl: `Attached File: ${fileName}`,
+                    fileName: fileName || '',
+                    fileType: fileType || '',
                     fileData: fileBase64 || '',
                     notes: document.getElementById('appNotes').value || ''
                 };
